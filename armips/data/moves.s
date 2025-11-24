@@ -8463,7 +8463,7 @@ movedata MOVE_DRAGON_TAIL, "Dragon Tail"
     pss SPLIT_PHYSICAL
     basepower 60
     type TYPE_DRAGON
-    accuracy 90
+    accuracy 100
     pp 10
     effectchance 0
     target RANGE_SINGLE_TARGET
@@ -8495,7 +8495,7 @@ movedata MOVE_ELECTROWEB, "Electroweb"
     pss SPLIT_SPECIAL
     basepower 55
     type TYPE_ELECTRIC
-    accuracy 95
+    accuracy 100
     pp 15
     effectchance 100
     target RANGE_ADJACENT_OPPONENTS
@@ -8527,7 +8527,7 @@ movedata MOVE_DRILL_RUN, "Drill Run"
     pss SPLIT_PHYSICAL
     basepower 80
     type TYPE_GROUND
-    accuracy 95
+    accuracy 100
     pp 10
     effectchance 0
     target RANGE_SINGLE_TARGET
@@ -8543,7 +8543,7 @@ movedata MOVE_DUAL_CHOP, "Dual Chop"
     pss SPLIT_PHYSICAL
     basepower 40
     type TYPE_DRAGON
-    accuracy 90
+    accuracy 100
     pp 15
     effectchance 0
     target RANGE_SINGLE_TARGET
@@ -8607,7 +8607,7 @@ movedata MOVE_RAZOR_SHELL, "Razor Shell"
     pss SPLIT_PHYSICAL
     basepower 75
     type TYPE_WATER
-    accuracy 95
+    accuracy 100
     pp 10
     effectchance 50
     target RANGE_SINGLE_TARGET
@@ -8635,11 +8635,11 @@ movedata MOVE_HEAT_CRASH, "Heat Crash"
     movedescription MOVE_HEAT_CRASH, "The user slams down\nwith fire. The more\nthe user outweighs\nthe foe, the greater\nthe damage."
 
 movedata MOVE_LEAF_TORNADO, "Leaf Tornado"
-    battleeffect MOVE_EFFECT_LOWER_ACCURACY_HIT
+    battleeffect MOVE_EFFECT_HIT
     pss SPLIT_SPECIAL
     basepower 65
     type TYPE_GRASS
-    accuracy 90
+    accuracy 100
     pp 10
     effectchance 50
     target RANGE_SINGLE_TARGET
@@ -8648,10 +8648,10 @@ movedata MOVE_LEAF_TORNADO, "Leaf Tornado"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_LEAF_TORNADO, "Sharp leaves circle\nthe foe. It may also\nlower the foe’s\naccuracy."
+    movedescription MOVE_LEAF_TORNADO, "Sharp leaves circle\nthe foe."
 
 movedata MOVE_STEAMROLLER, "Steamroller"
-    battleeffect MOVE_EFFECT_FLINCH_MINIMIZE_DOUBLE_HIT
+    battleeffect MOVE_EFFECT_FLINCH_HIT
     pss SPLIT_PHYSICAL
     basepower 65
     type TYPE_BUG
@@ -8683,11 +8683,11 @@ movedata MOVE_COTTON_GUARD, "Cotton Guard"
     movedescription MOVE_COTTON_GUARD, "The user protects\nitself with cotton,\ndrastically raising\nits Defense."
 
 movedata MOVE_NIGHT_DAZE, "Night Daze"
-    battleeffect MOVE_EFFECT_LOWER_ACCURACY_HIT
+    battleeffect MOVE_EFFECT_HIT
     pss SPLIT_SPECIAL
-    basepower 85
+    basepower 95
     type TYPE_DARK
-    accuracy 95
+    accuracy 100
     pp 10
     effectchance 40
     target RANGE_SINGLE_TARGET
@@ -8696,7 +8696,7 @@ movedata MOVE_NIGHT_DAZE, "Night Daze"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_NIGHT_DAZE, "The user releases a\npitch-black blast\nat its target. May\nalso lower target’s\naccuracy."
+    movedescription MOVE_NIGHT_DAZE, "The user releases a\npitch-black blast\nat its target."
 
 movedata MOVE_PSYSTRIKE, "Psystrike"
     battleeffect MOVE_EFFECT_HIT
@@ -8719,7 +8719,7 @@ movedata MOVE_TAIL_SLAP, "Tail Slap"
     pss SPLIT_PHYSICAL
     basepower 25
     type TYPE_NORMAL
-    accuracy 85
+    accuracy 100
     pp 10
     effectchance 0
     target RANGE_SINGLE_TARGET
@@ -8767,7 +8767,7 @@ movedata MOVE_GEAR_GRIND, "Gear Grind"
     pss SPLIT_PHYSICAL
     basepower 50
     type TYPE_STEEL
-    accuracy 85
+    accuracy 100
     pp 15
     effectchance 0
     target RANGE_SINGLE_TARGET
@@ -8847,7 +8847,7 @@ movedata MOVE_GLACIATE, "Glaciate"
     pss SPLIT_SPECIAL
     basepower 65
     type TYPE_ICE
-    accuracy 95
+    accuracy 100
     pp 10
     effectchance 100
     target RANGE_ADJACENT_OPPONENTS
@@ -8911,7 +8911,7 @@ movedata MOVE_FREEZE_SHOCK, "Freeze Shock"
     pss SPLIT_SPECIAL
     basepower 140
     type TYPE_ICE
-    accuracy 90
+    accuracy 100
     pp 5
     effectchance 30
     target RANGE_SINGLE_TARGET
@@ -8927,7 +8927,7 @@ movedata MOVE_ICE_BURN, "Ice Burn"
     pss SPLIT_SPECIAL
     basepower 140
     type TYPE_ICE
-    accuracy 90
+    accuracy 100
     pp 5
     effectchance 30
     target RANGE_SINGLE_TARGET
@@ -8943,7 +8943,7 @@ movedata MOVE_SNARL, "Snarl"
     pss SPLIT_SPECIAL
     basepower 55
     type TYPE_DARK
-    accuracy 95
+    accuracy 100
     pp 15
     effectchance 100
     target RANGE_ADJACENT_OPPONENTS
@@ -8959,7 +8959,7 @@ movedata MOVE_ICICLE_CRASH, "Icicle Crash"
     pss SPLIT_PHYSICAL
     basepower 85
     type TYPE_ICE
-    accuracy 90
+    accuracy 100
     pp 10
     effectchance 30
     target RANGE_SINGLE_TARGET
@@ -8975,7 +8975,7 @@ movedata MOVE_V_CREATE, "V-create"
     pss SPLIT_PHYSICAL
     basepower 180
     type TYPE_FIRE
-    accuracy 95
+    accuracy 100
     pp 5
     effectchance 100
     target RANGE_SINGLE_TARGET
@@ -9024,7 +9024,7 @@ movedata MOVE_FLYING_PRESS, "Flying Press"
     pss SPLIT_PHYSICAL
     basepower 100
     type TYPE_FIGHTING
-    accuracy 95
+    accuracy 100
     pp 10
     effectchance 0
     target RANGE_SINGLE_TARGET

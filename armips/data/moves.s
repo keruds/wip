@@ -9392,7 +9392,7 @@ movedata MOVE_PLAY_ROUGH, "Play Rough"
     pss SPLIT_PHYSICAL
     basepower 90
     type (FAIRY_TYPE_IMPLEMENTED) ? TYPE_FAIRY : TYPE_NORMAL
-    accuracy 90
+    accuracy 100
     pp 10
     effectchance 10
     target RANGE_SINGLE_TARGET
@@ -9481,7 +9481,7 @@ movedata MOVE_KINGS_SHIELD, "King’s Shield"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_KINGS_SHIELD, "---"
+    movedescription MOVE_KINGS_SHIELD, "The user protects itself from damage."
 
 movedata MOVE_PLAY_NICE, "Play Nice"
     battleeffect MOVE_EFFECT_ATK_DOWN
@@ -9534,9 +9534,9 @@ movedata MOVE_DIAMOND_STORM, "Diamond Storm"
 movedata MOVE_STEAM_ERUPTION, "Steam Eruption"
     battleeffect MOVE_EFFECT_THAW_AND_BURN_HIT
     pss SPLIT_SPECIAL
-    basepower 110
+    basepower 120
     type TYPE_WATER
-    accuracy 95
+    accuracy 100
     pp 5
     effectchance 30
     target RANGE_SINGLE_TARGET
@@ -9609,7 +9609,7 @@ movedata MOVE_SPIKY_SHIELD, "Spiky Shield"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_SPIKY_SHIELD, "---"
+    movedescription MOVE_SPIKY_SHIELD, "The user protects itself from damage"
 
 movedata MOVE_AROMATIC_MIST, "Aromatic Mist"
     battleeffect MOVE_EFFECT_HIT
@@ -9737,7 +9737,7 @@ movedatalongname MOVE_ELECTRIC_TERRAIN, "ElectricTerrain", "Electric Terrain"
     appeal 0x05
     contesttype CONTEST_SMART // Prior to Pokémon Omega Ruby and Alpha Sapphire, it was known as the Smart condition.
     terminatedata
-    movedescription MOVE_ELECTRIC_TERRAIN, "---"
+    movedescription MOVE_ELECTRIC_TERRAIN, "The user electrifies\nthe ground for\nfive turns."
 
 movedata MOVE_DAZZLING_GLEAM, "Dazzling Gleam"
     battleeffect MOVE_EFFECT_HIT
@@ -9881,7 +9881,7 @@ movedata MOVE_OBLIVION_WING, "Oblivion Wing"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_OBLIVION_WING, "---"
+    movedescription MOVE_OBLIVION_WING, "The user absorbs its target's hp."
 
 movedata MOVE_THOUSAND_ARROWS, "Thousand Arrows"
     battleeffect MOVE_EFFECT_HIT
@@ -10665,7 +10665,7 @@ movedata MOVE_SPIRIT_SHACKLE, "Spirit Shackle"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_SPIRIT_SHACKLE, "---"
+    movedescription MOVE_SPIRIT_SHACKLE, "The user attacks while stitching\nthe target's shadow to\nthe ground to prevent escape."
 
 movedata MOVE_DARKEST_LARIAT, "Darkest Lariat"
     battleeffect MOVE_EFFECT_HIT
@@ -10681,7 +10681,7 @@ movedata MOVE_DARKEST_LARIAT, "Darkest Lariat"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_DARKEST_LARIAT, "---"
+    movedescription MOVE_DARKEST_LARIAT, "The user swings both arms\nand hits the target."
 
 movedata MOVE_SPARKLING_ARIA, "Sparkling Aria"
     battleeffect MOVE_EFFECT_HIT // handled in BattleController_MoveEndInternal
@@ -10736,7 +10736,7 @@ movedata MOVE_HIGH_HORSEPOWER, "High Horsepower"
     pss SPLIT_PHYSICAL
     basepower 95
     type TYPE_GROUND
-    accuracy 95
+    accuracy 100
     pp 10
     effectchance 0
     target RANGE_SINGLE_TARGET

@@ -11348,7 +11348,7 @@ movedata MOVE_FLEUR_CANNON, "Fleur Cannon"
     pss SPLIT_SPECIAL
     basepower 130
     type (FAIRY_TYPE_IMPLEMENTED) ? TYPE_FAIRY : TYPE_NORMAL
-    accuracy 90
+    accuracy 100
     pp 5
     effectchance 100
     target RANGE_SINGLE_TARGET
@@ -11437,7 +11437,7 @@ movedata MOVE_LIQUIDATION, "Liquidation"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_LIQUIDATION, "---"
+    movedescription MOVE_LIQUIDATION, "The user slams with a\nforceful water blast.\nIt may lower the foe's Defense."
 
 movedata MOVE_PRISMATIC_LASER, "Prismatic Laser"
     battleeffect MOVE_EFFECT_RECHARGE_AFTER
@@ -11584,7 +11584,7 @@ movedatalongname MOVE_10_000_000_VOLT_THUNDERBOLT, "10,000,000 Bolt", "10,000,00
     movedescription MOVE_10_000_000_VOLT_THUNDERBOLT, "---"
 
 movedata MOVE_MIND_BLOWN, "Mind Blown"
-    battleeffect MOVE_EFFECT_HIT
+    battleeffect MOVE_EFFECT_RECOIL_HALF
     pss SPLIT_SPECIAL
     basepower 150
     type TYPE_FIRE
@@ -11728,9 +11728,9 @@ movedatalongname MOVE_CLANGOROUS_SOULBLAZE, "Clang Soulblaze", "Clangorous Soulb
     movedescription MOVE_CLANGOROUS_SOULBLAZE, "---"
 
 movedata MOVE_ZIPPY_ZAP, "Zippy Zap"
-    battleeffect MOVE_EFFECT_RAISE_EVA_HIT
+    battleeffect MOVE_EFFECT_ALWAYS_CRITICAL
     pss SPLIT_PHYSICAL
-    basepower 80
+    basepower 50
     type TYPE_ELECTRIC
     accuracy 100
     pp 10
@@ -11741,7 +11741,7 @@ movedata MOVE_ZIPPY_ZAP, "Zippy Zap"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_ZIPPY_ZAP, "---"
+    movedescription MOVE_ZIPPY_ZAP, "The user bursts with\nelectricity, going first\nand is always a critical hit."
 
 movedata MOVE_SPLISHY_SPLASH, "Splishy Splash"
     battleeffect MOVE_EFFECT_PARALYZE_HIT
@@ -11792,9 +11792,9 @@ movedata MOVE_PIKA_PAPOW, "Pika Papow"
     movedescription MOVE_PIKA_PAPOW, "The more Pikachu\nloves its Trainer,\nthe greater the\nmove's power.\nIt never misses."
 
 movedata MOVE_BOUNCY_BUBBLE, "Bouncy Bubble"
-    battleeffect MOVE_EFFECT_RECOVER_FULL_DAMAGE_DEALT
+    battleeffect MOVE_EFFECT_RECOVER_HALF_DAMAGE_DEALT
     pss SPLIT_SPECIAL
-    basepower 60
+    basepower 90
     type TYPE_WATER
     accuracy 100
     pp 20
@@ -11805,7 +11805,7 @@ movedata MOVE_BOUNCY_BUBBLE, "Bouncy Bubble"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_BOUNCY_BUBBLE, "---"
+    movedescription MOVE_BOUNCY_BUBBLE, "The user attacks with water bubbles\nthat drain half the damage it\ninflicted."
 
 movedata MOVE_BUZZY_BUZZ, "Buzzy Buzz"
     battleeffect MOVE_EFFECT_PARALYZE_HIT
@@ -11885,14 +11885,14 @@ movedata MOVE_SAPPY_SEED, "Sappy Seed"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_SAPPY_SEED, "---"
+    movedescription MOVE_SAPPY_SEED, "The user scatters seeds to attack,\ndraining the target's hp every turn."
 
 movedata MOVE_FREEZY_FROST, "Freezy Frost"
     battleeffect MOVE_EFFECT_RESET_STAT_CHANGES_HIT
     pss SPLIT_SPECIAL
-    basepower 100
+    basepower 95
     type TYPE_ICE
-    accuracy 90
+    accuracy 100
     pp 10
     effectchance 0
     target RANGE_SINGLE_TARGET
@@ -11901,14 +11901,14 @@ movedata MOVE_FREEZY_FROST, "Freezy Frost"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_FREEZY_FROST, "---"
+    movedescription MOVE_FREEZY_FROST, "The user attacks with a large\ncrystal that removes all\nstat changes on the field."
 
 movedata MOVE_SPARKLY_SWIRL, "Sparkly Swirl"
     battleeffect MOVE_EFFECT_CURE_PARTY_STATUS_HIT
     pss SPLIT_SPECIAL
-    basepower 120
+    basepower 95
     type (FAIRY_TYPE_IMPLEMENTED) ? TYPE_FAIRY : TYPE_NORMAL
-    accuracy 85
+    accuracy 100
     pp 5
     effectchance 0
     target RANGE_SINGLE_TARGET
@@ -11917,7 +11917,7 @@ movedata MOVE_SPARKLY_SWIRL, "Sparkly Swirl"
     appeal 0x00
     contesttype CONTEST_COOL
     terminatedata
-    movedescription MOVE_SPARKLY_SWIRL, "---"
+    movedescription MOVE_SPARKLY_SWIRL, "The user attacks with a \nwhirlwind that heals status\problems on the user's party."
 
 movedata MOVE_VEEVEE_VOLLEY, "Veevee Volley"
     battleeffect MOVE_EFFECT_POWER_BASED_ON_FRIENDSHIP
@@ -11986,7 +11986,7 @@ movedata MOVE_DYNAMAX_CANNON, "Dynamax Cannon"
 movedata MOVE_SNIPE_SHOT, "Snipe Shot"
     battleeffect MOVE_EFFECT_HIGH_CRITICAL
     pss SPLIT_SPECIAL
-    basepower 80
+    basepower 70
     type TYPE_WATER
     accuracy 100
     pp 15

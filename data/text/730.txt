@@ -64,17 +64,17 @@ Team Rocket
 Burglar
 Firebreather
 Biker
-Leader
-Leader
+Gym Leader
+Gym Leader
 Poké Maniac
 Bird Keeper
-Leader
+Gym Leader
 Rancher
-Leader
-Leader
-Leader
-Leader
-Leader
+Gym Leader
+Gym Leader
+Gym Leader
+Gym Leader
+Gym Leader
 Teacher
 Super Nerd
 Sage
@@ -96,19 +96,19 @@ Elite Four
 ₧₦ Trainer
 ₧₦ Trainer
 Tower Tycoon
-Leader
+Gym Leader
 Hall Matron
 Factory Head
 Arcade Star
 Castle Valet
-Leader
-Leader
-Leader
-Leader
-Leader
-Leader
+Gym Leader
+Gym Leader
+Gym Leader
+Gym Leader
+Gym Leader
+Gym Leader
 ₧₦ Trainer
-Leader
+Gym Leader
 Elder
 Elite Four
 Scientist

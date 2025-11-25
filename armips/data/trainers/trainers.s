@@ -2416,9 +2416,9 @@ trainerdata 46, "Martha"
     endparty
 
 trainerdata 47, "Mikey"
-    trainermontype TRAINER_DATA_TYPE_IV_EV_SET | 0
+    trainermontype TRAINER_DATA_TYPE_IV_EV_SET | TRAINER_DATA_TYPE_ABILITY | TRAINER_DATA_TYPE_MOVES | TRAINER_DATA_TYPE_NATURE_SET | 0
     trainerclass TRAINERCLASS_YOUNGSTER
-    nummons 1
+    nummons 2
     item ITEM_NONE
     item ITEM_NONE
     item ITEM_NONE
@@ -2431,10 +2431,30 @@ trainerdata 47, "Mikey"
         // mon 0
         ivs 255
         abilityslot 0
-        level 2
+        level 6
         pokemon SPECIES_SENTRET
-        setivs 31, 31, 31, 31, 31, 31
+		move MOVE_SCRATCH
+		move MOVE_DEFENSE_CURL
+		move MOVE_NONE
+		move MOVE_NONE
+		ability ABILITY_FRISK
+        setivs 10, 10, 10, 10, 10, 10
         setevs 0, 0, 0, 0, 0, 0
+		nature NATURE_ADAMANT
+        ballseal 0
+		// mon 1
+        ivs 255
+        abilityslot 0
+        level 6
+        pokemon SPECIES_PIDGEY
+		move MOVE_TACKLE
+		move MOVE_FEATHER_DANCE
+		move MOVE_NONE
+		move MOVE_NONE
+		ability ABILITY_FRISK
+        setivs 10, 10, 10, 10, 10, 10
+        setevs 0, 0, 0, 0, 0, 0
+		nature NATURE_ADAMANT
         ballseal 0
 
     endparty

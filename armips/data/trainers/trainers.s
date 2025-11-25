@@ -1090,7 +1090,7 @@ trainerdata 20, "Falkner"
         move MOVE_STEEL_WING
         move MOVE_U_TURN
         ability ABILITY_INTIMIDATE
-        setivs 12, 12, 12, 12, 12, 12
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_ADAMANT
         ballseal 0
@@ -1106,7 +1106,7 @@ trainerdata 20, "Falkner"
         move MOVE_HYPNOSIS
         move MOVE_AIR_CUTTER
         ability ABILITY_TINTED_LENS
-        setivs 12, 12, 12, 12, 12, 12
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_MODEST
         ballseal 0
@@ -1122,7 +1122,7 @@ trainerdata 20, "Falkner"
         move MOVE_SAND_TOMB
         move MOVE_KNOCK_OFF
         ability ABILITY_POISON_HEAL
-        setivs 6, 6, 6, 6, 6, 6
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_ADAMANT
         ballseal 0
@@ -1138,7 +1138,7 @@ trainerdata 20, "Falkner"
         move MOVE_HAZE
         move MOVE_STEEL_WING
         ability ABILITY_SUPER_LUCK
-        setivs 12, 12, 12, 12, 12, 12
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_SERIOUS
         ballseal 0
@@ -1154,7 +1154,7 @@ trainerdata 20, "Falkner"
         move MOVE_ICY_WIND
         move MOVE_AQUA_JET
         ability ABILITY_HYDRATION
-        setivs 12, 12, 12, 12, 12, 12
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_SERIOUS
         ballseal 0
@@ -1170,7 +1170,7 @@ trainerdata 20, "Falkner"
         move MOVE_QUICK_ATTACK
         move MOVE_ROOST
         ability ABILITY_VOLT_ABSORB
-        setivs 12, 12, 12, 12, 12, 12
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_SERIOUS
         ballseal 0
@@ -37224,7 +37224,7 @@ trainerdata 712, "Falkner"
         move MOVE_CLOSE_COMBAT
         move MOVE_U_TURN
         ability ABILITY_INTIMIDATE
-        setivs 24, 24, 24, 24, 24, 24
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_HASTY
         ballseal 0
@@ -37240,7 +37240,7 @@ trainerdata 712, "Falkner"
         move MOVE_SHADOW_BALL
         move MOVE_FEATHER_DANCE
         ability ABILITY_TINTED_LENS
-        setivs 24, 24, 24, 24, 24, 24
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_MILD
         ballseal 0
@@ -37256,7 +37256,7 @@ trainerdata 712, "Falkner"
         move MOVE_DOUBLE_TEAM
         move MOVE_ENDEAVOR
         ability ABILITY_GUTS
-        setivs 24, 24, 24, 24, 24, 24
+        setivs 31, 31, 31, 31, 31, 31
         setevs 0, 0, 0, 0, 0, 0
         nature NATURE_HASTY
         ballseal 0

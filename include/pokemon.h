@@ -13,6 +13,9 @@
 #define POKEMON_GENDER_FEMALE 1
 #define POKEMON_GENDER_UNKNOWN 2
 
+#define MOVE_APPEND_FULL    0xFFFFu
+#define MOVE_APPEND_KNOWN   0xFFFEu
+
 #define MONS_MALE       (0)
 #define MONS_FEMALE     (254)
 #define MONS_UNKNOWN    (255)
@@ -1006,6 +1009,15 @@ u32 LONG_CALL GetBoxMonData(struct BoxPokemon *boxmon, int field, void *buffer);
 void  LONG_CALL SetBoxMonData(struct BoxPokemon *boxmon, int id, const void *buf);
 
 /**
+ *  @brief adds to a specific field on a PartyPokemon
+ *
+ *  @param mon PartyPokemon to set data on
+ *  @param attr MON_DATA_* constant to determine which data to set
+ *  @param amount amount to increase by
+ */
+void LONG_CALL AddMonData(struct PartyPokemon *mon, int attr, int amount);
+
+/**
  *  @brief grab the pointer to a member in a Party
  *
  *  @param party Party whose member to grab
@@ -1447,7 +1459,7 @@ void LONG_CALL CopyBoxPokemonToPokemon(const struct BoxPokemon *src, struct Part
  *  @param level level asked for
  *  @return experience needed to reach specified level
  */
-int LONG_CALL GetExpByGrowthRateAndLevel(int growthrate, u32 level);
+u32 LONG_CALL GetExpByGrowthRateAndLevel(int growthrate, u32 level);
 
 /**
  *  @brief restore the pp of a BoxPokemon's moves
@@ -1899,5 +1911,11 @@ void LONG_CALL MonApplyFriendshipMod(struct PartyPokemon *mon, u8 kind, u16 loca
 u8 LONG_CALL GetMoveMaxPP(u16 moveId, u8 ppUps);
 
 void LONG_CALL ApplyMonMoodModifier(struct PartyPokemon *mon, int modifierId);
+
+void LONG_CALL ov12_02263D14(void *bsys, int battlerId, u32 a2, int slot);
+
+void LONG_CALL *SelectPartyMonAndLearnMove(void *taskman, u32 heapId);
+
+u32 LONG_CALL CalcMonExpToNextLevel(struct PartyPokemon *mon);
 
 #endif

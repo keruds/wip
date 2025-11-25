@@ -23410,7 +23410,7 @@ mondata SPECIES_KYOGRE_PRIMAL, "-----"
     runchance 0
     colorflip 0, 0
 
-mondata SPECIES_RATTATA_ALOLAN, "-----"
+mondata SPECIES_RATTATA_ALOLAN, "Rattata"
     basestats 30, 56, 35, 72, 25, 35
     types TYPE_DARK, TYPE_NORMAL
     catchrate 255
@@ -23426,7 +23426,7 @@ mondata SPECIES_RATTATA_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLACK, 0
 
-mondata SPECIES_RATICATE_ALOLAN, "-----"
+mondata SPECIES_RATICATE_ALOLAN, "Raticate"
     basestats 75, 86, 70, 77, 40, 80
     types TYPE_DARK, TYPE_NORMAL
     catchrate 127
@@ -23442,7 +23442,7 @@ mondata SPECIES_RATICATE_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLACK, 0
 
-mondata SPECIES_RAICHU_ALOLAN, "-----"
+mondata SPECIES_RAICHU_ALOLAN, "Raichu"
     basestats 60, 85, 50, 110, 95, 85
     types TYPE_ELECTRIC, TYPE_PSYCHIC
     catchrate 75
@@ -23458,7 +23458,7 @@ mondata SPECIES_RAICHU_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_SANDSHREW_ALOLAN, "-----"
+mondata SPECIES_SANDSHREW_ALOLAN, "Sandshrew"
     basestats 50, 75, 90, 40, 10, 35
     types TYPE_ICE, TYPE_STEEL
     catchrate 255
@@ -23474,7 +23474,7 @@ mondata SPECIES_SANDSHREW_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_SANDSLASH_ALOLAN, "-----"
+mondata SPECIES_SANDSLASH_ALOLAN, "Sandslash"
     basestats 75, 110, 120, 65, 25, 65
     types TYPE_ICE, TYPE_STEEL
     catchrate 90
@@ -23490,7 +23490,7 @@ mondata SPECIES_SANDSLASH_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_VULPIX_ALOLAN, "-----"
+mondata SPECIES_VULPIX_ALOLAN, "Vulpix"
     basestats 38, 41, 40, 65, 50, 65
     types TYPE_ICE, TYPE_ICE
     catchrate 190
@@ -23506,7 +23506,7 @@ mondata SPECIES_VULPIX_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_NINETALES_ALOLAN, "-----"
+mondata SPECIES_NINETALES_ALOLAN, "Ninetales"
     basestats 73, 67, 75, 109, 81, 100
     types TYPE_ICE, TYPE_FAIRY
     catchrate 75
@@ -23522,7 +23522,7 @@ mondata SPECIES_NINETALES_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_DIGLETT_ALOLAN, "-----"
+mondata SPECIES_DIGLETT_ALOLAN, "Diglett"
     basestats 10, 55, 30, 90, 35, 45
     types TYPE_GROUND, TYPE_STEEL
     catchrate 255
@@ -23538,7 +23538,7 @@ mondata SPECIES_DIGLETT_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_DUGTRIO_ALOLAN, "-----"
+mondata SPECIES_DUGTRIO_ALOLAN, "Dugtrio"
     basestats 35, 110, 60, 110, 50, 70
     types TYPE_GROUND, TYPE_STEEL
     catchrate 50
@@ -23554,7 +23554,7 @@ mondata SPECIES_DUGTRIO_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 1
 
-mondata SPECIES_MEOWTH_ALOLAN, "-----"
+mondata SPECIES_MEOWTH_ALOLAN, "Meowth"
     basestats 40, 35, 35, 90, 40, 40
     types TYPE_DARK, TYPE_DARK
     catchrate 255
@@ -23570,7 +23570,7 @@ mondata SPECIES_MEOWTH_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_GRAY, 0
 
-mondata SPECIES_PERSIAN_ALOLAN, "-----"
+mondata SPECIES_PERSIAN_ALOLAN, "Persian"
     basestats 65, 60, 60, 115, 55, 65
     types TYPE_DARK, TYPE_DARK
     catchrate 90
@@ -23586,7 +23586,7 @@ mondata SPECIES_PERSIAN_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_GRAY, 0
 
-mondata SPECIES_GEODUDE_ALOLAN, "-----"
+mondata SPECIES_GEODUDE_ALOLAN, "Geodude"
     basestats 40, 80, 100, 20, 30, 30
     types TYPE_ROCK, TYPE_ELECTRIC
     catchrate 255
@@ -23602,7 +23602,7 @@ mondata SPECIES_GEODUDE_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_GRAVELER_ALOLAN, "-----"
+mondata SPECIES_GRAVELER_ALOLAN, "Graveler"
     basestats 55, 95, 115, 35, 45, 45
     types TYPE_ROCK, TYPE_ELECTRIC
     catchrate 120
@@ -23618,7 +23618,7 @@ mondata SPECIES_GRAVELER_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_GOLEM_ALOLAN, "-----"
+mondata SPECIES_GOLEM_ALOLAN, "Golem"
     basestats 80, 120, 130, 45, 55, 65
     types TYPE_ROCK, TYPE_ELECTRIC
     catchrate 45
@@ -23634,7 +23634,7 @@ mondata SPECIES_GOLEM_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_GRIMER_ALOLAN, "-----"
+mondata SPECIES_GRIMER_ALOLAN, "Grimer"
     basestats 80, 80, 50, 25, 40, 50
     types TYPE_POISON, TYPE_DARK
     catchrate 190
@@ -23650,7 +23650,7 @@ mondata SPECIES_GRIMER_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_GREEN, 0
 
-mondata SPECIES_MUK_ALOLAN, "-----"
+mondata SPECIES_MUK_ALOLAN, "Muk"
     basestats 105, 105, 75, 50, 65, 100
     types TYPE_POISON, TYPE_DARK
     catchrate 75
@@ -23666,7 +23666,7 @@ mondata SPECIES_MUK_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_GREEN, 1
 
-mondata SPECIES_EXEGGUTOR_ALOLAN, "-----"
+mondata SPECIES_EXEGGUTOR_ALOLAN, "Exeggutor"
     basestats 95, 105, 85, 45, 125, 75
     types TYPE_GRASS, TYPE_DRAGON
     catchrate 45
@@ -23682,7 +23682,7 @@ mondata SPECIES_EXEGGUTOR_ALOLAN, "-----"
     runchance 0
     colorflip BODY_COLOR_YELLOW, 0
 
-mondata SPECIES_MAROWAK_ALOLAN, "-----"
+mondata SPECIES_MAROWAK_ALOLAN, "Marowak"
     basestats 60, 80, 110, 45, 50, 80
     types TYPE_FIRE, TYPE_GHOST
     catchrate 75
@@ -23890,7 +23890,7 @@ mondata SPECIES_KOMMO_O_LARGE, "-----"
     runchance 0
     colorflip BODY_COLOR_GRAY, 0
 
-mondata SPECIES_MEOWTH_GALARIAN, "-----"
+mondata SPECIES_MEOWTH_GALARIAN, "Meowth"
     basestats 50, 65, 55, 40, 40, 40
     types TYPE_STEEL, TYPE_STEEL
     catchrate 255
@@ -23906,7 +23906,7 @@ mondata SPECIES_MEOWTH_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_PONYTA_GALARIAN, "-----"
+mondata SPECIES_PONYTA_GALARIAN, "Ponyta"
     basestats 50, 85, 55, 90, 65, 65
     types TYPE_FIRE, TYPE_FAIRY
     catchrate 190
@@ -23922,7 +23922,7 @@ mondata SPECIES_PONYTA_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_RAPIDASH_GALARIAN, "-----"
+mondata SPECIES_RAPIDASH_GALARIAN, "Rapidash"
     basestats 65, 100, 70, 125, 80, 80
     types TYPE_FIRE, TYPE_FAIRY
     catchrate 60
@@ -23938,7 +23938,7 @@ mondata SPECIES_RAPIDASH_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_SLOWPOKE_GALARIAN, "-----"
+mondata SPECIES_SLOWPOKE_GALARIAN, "Slowpoke"
     basestats 90, 65, 65, 15, 40, 40
     types TYPE_PSYCHIC, TYPE_PSYCHIC
     catchrate 190
@@ -23954,7 +23954,7 @@ mondata SPECIES_SLOWPOKE_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_PINK, 0
 
-mondata SPECIES_SLOWBRO_GALARIAN, "-----"
+mondata SPECIES_SLOWBRO_GALARIAN, "Slowbro"
     basestats 95, 75, 105, 30, 115, 70
     types TYPE_POISON, TYPE_PSYCHIC
     catchrate 75
@@ -23970,7 +23970,7 @@ mondata SPECIES_SLOWBRO_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_PINK, 0
 
-mondata SPECIES_FARFETCHD_GALARIAN, "-----"
+mondata SPECIES_FARFETCHD_GALARIAN, "Farfetch’d"
     basestats 52, 95, 55, 55, 58, 62
     types TYPE_FIGHTING, TYPE_FIGHTING
     catchrate 45
@@ -23986,7 +23986,7 @@ mondata SPECIES_FARFETCHD_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_WEEZING_GALARIAN, "-----"
+mondata SPECIES_WEEZING_GALARIAN, "Weezing"
     basestats 65, 90, 120, 60, 85, 70
     types TYPE_POISON, TYPE_FAIRY
     catchrate 60
@@ -24002,7 +24002,7 @@ mondata SPECIES_WEEZING_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_GRAY, 0
 
-mondata SPECIES_MR_MIME_GALARIAN, "-----"
+mondata SPECIES_MR_MIME_GALARIAN, "Mr.Mime"
     basestats 50, 65, 65, 100, 90, 90
     types TYPE_ICE, TYPE_PSYCHIC
     catchrate 45
@@ -24018,7 +24018,7 @@ mondata SPECIES_MR_MIME_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_ARTICUNO_GALARIAN, "-----"
+mondata SPECIES_ARTICUNO_GALARIAN, "Articuno"
     basestats 90, 70, 95, 100, 125, 100
     types TYPE_PSYCHIC, TYPE_FLYING
     catchrate 3
@@ -24034,7 +24034,7 @@ mondata SPECIES_ARTICUNO_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_PURPLE, 0
 
-mondata SPECIES_ZAPDOS_GALARIAN, "-----"
+mondata SPECIES_ZAPDOS_GALARIAN, "Zapdos"
     basestats 90, 125, 90, 100, 85, 90
     types TYPE_FIGHTING, TYPE_FLYING
     catchrate 3
@@ -24050,7 +24050,7 @@ mondata SPECIES_ZAPDOS_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_YELLOW, 0
 
-mondata SPECIES_MOLTRES_GALARIAN, "-----"
+mondata SPECIES_MOLTRES_GALARIAN, "Moltres"
     basestats 90, 85, 90, 90, 100, 125
     types TYPE_DARK, TYPE_FLYING
     catchrate 3
@@ -24066,7 +24066,7 @@ mondata SPECIES_MOLTRES_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_RED, 0
 
-mondata SPECIES_SLOWKING_GALARIAN, "-----"
+mondata SPECIES_SLOWKING_GALARIAN, "Slowking"
     basestats 95, 65, 80, 30, 110, 110
     types TYPE_POISON, TYPE_PSYCHIC
     catchrate 70
@@ -24082,7 +24082,7 @@ mondata SPECIES_SLOWKING_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_PINK, 0
 
-mondata SPECIES_CORSOLA_GALARIAN, "-----"
+mondata SPECIES_CORSOLA_GALARIAN, "Corsola"
     basestats 60, 55, 100, 30, 65, 100
     types TYPE_GHOST, TYPE_GHOST
     catchrate 60
@@ -24098,7 +24098,7 @@ mondata SPECIES_CORSOLA_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_ZIGZAGOON_GALARIAN, "-----"
+mondata SPECIES_ZIGZAGOON_GALARIAN, "Zigzagoon"
     basestats 38, 30, 41, 60, 30, 41
     types TYPE_DARK, TYPE_NORMAL
     catchrate 255
@@ -24114,7 +24114,7 @@ mondata SPECIES_ZIGZAGOON_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_LINOONE_GALARIAN, "-----"
+mondata SPECIES_LINOONE_GALARIAN, "Linoone"
     basestats 78, 70, 61, 100, 50, 61
     types TYPE_DARK, TYPE_NORMAL
     catchrate 90
@@ -24130,7 +24130,7 @@ mondata SPECIES_LINOONE_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_DARUMAKA_GALARIAN, "-----"
+mondata SPECIES_DARUMAKA_GALARIAN, "Darumaka"
     basestats 70, 90, 45, 50, 15, 45
     types TYPE_ICE, TYPE_ICE
     catchrate 120
@@ -24146,7 +24146,7 @@ mondata SPECIES_DARUMAKA_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_DARMANITAN_GALARIAN, "-----"
+mondata SPECIES_DARMANITAN_GALARIAN, "Darmanitan"
     basestats 105, 140, 55, 95, 30, 55
     types TYPE_ICE, TYPE_ICE
     catchrate 60
@@ -24162,7 +24162,7 @@ mondata SPECIES_DARMANITAN_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_YAMASK_GALARIAN, "-----"
+mondata SPECIES_YAMASK_GALARIAN, "Yamask"
     basestats 38, 55, 85, 30, 30, 65
     types TYPE_GROUND, TYPE_GHOST
     catchrate 190
@@ -24178,7 +24178,7 @@ mondata SPECIES_YAMASK_GALARIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLACK, 0
 
-mondata SPECIES_STUNFISK_GALARIAN, "-----"
+mondata SPECIES_STUNFISK_GALARIAN, "Stunfisk"
     basestats 109, 81, 99, 32, 66, 84
     types TYPE_GROUND, TYPE_STEEL
     catchrate 75
@@ -24482,7 +24482,7 @@ mondata SPECIES_CHERRIM_SUNSHINE, "-----"
     runchance 0
     colorflip BODY_COLOR_PINK, 0
 
-mondata SPECIES_SHELLOS_EAST_SEA, "-----"
+mondata SPECIES_SHELLOS_EAST_SEA, "Shellos"
     basestats 76, 48, 48, 34, 57, 62
     types TYPE_WATER, TYPE_WATER
     catchrate 190
@@ -24498,7 +24498,7 @@ mondata SPECIES_SHELLOS_EAST_SEA, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_GASTRODON_EAST_SEA, "-----"
+mondata SPECIES_GASTRODON_EAST_SEA, "Gastrodon"
     basestats 111, 83, 68, 39, 92, 82
     types TYPE_WATER, TYPE_GROUND
     catchrate 75
@@ -24546,7 +24546,7 @@ mondata SPECIES_PALKIA_ORIGIN, "-----"
     runchance 0
     colorflip BODY_COLOR_PURPLE, 0
 
-mondata SPECIES_BASCULIN_BLUE_STRIPED, "-----"
+mondata SPECIES_BASCULIN_BLUE_STRIPED, "Basculin"
     basestats 70, 92, 65, 98, 80, 55
     types TYPE_WATER, TYPE_WATER
     catchrate 25
@@ -24578,7 +24578,7 @@ mondata SPECIES_BASCULIN_WHITE_STRIPED, "-----"
     runchance 0
     colorflip BODY_COLOR_GREEN, 0
 
-mondata SPECIES_DARMANITAN_ZEN_MODE, "-----"
+mondata SPECIES_DARMANITAN_ZEN_MODE, "Darmanitan"
     basestats 105, 30, 105, 55, 140, 105
     types TYPE_FIRE, TYPE_PSYCHIC
     catchrate 60
@@ -26610,7 +26610,7 @@ mondata SPECIES_ENAMORUS_THERIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_PINK, 0
 
-mondata SPECIES_GROWLITHE_HISUIAN, "-----"
+mondata SPECIES_GROWLITHE_HISUIAN, "Growlithe"
     basestats 60, 75, 45, 55, 65, 50
     types TYPE_FIRE, TYPE_ROCK
     catchrate 235
@@ -26626,7 +26626,7 @@ mondata SPECIES_GROWLITHE_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_ARCANINE_HISUIAN, "-----"
+mondata SPECIES_ARCANINE_HISUIAN, "Arcanine"
     basestats 95, 125, 80, 90, 85, 80
     types TYPE_FIRE, TYPE_ROCK
     catchrate 0
@@ -26642,7 +26642,7 @@ mondata SPECIES_ARCANINE_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_VOLTORB_HISUIAN, "-----"
+mondata SPECIES_VOLTORB_HISUIAN, "Voltorb"
     basestats 40, 30, 50, 100, 55, 55
     types TYPE_ELECTRIC, TYPE_GRASS
     catchrate 235
@@ -26658,7 +26658,7 @@ mondata SPECIES_VOLTORB_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_RED, 0
 
-mondata SPECIES_ELECTRODE_HISUIAN, "-----"
+mondata SPECIES_ELECTRODE_HISUIAN, "Electrode"
     basestats 60, 55, 70, 150, 95, 80
     types TYPE_ELECTRIC, TYPE_GRASS
     catchrate 135
@@ -26674,7 +26674,7 @@ mondata SPECIES_ELECTRODE_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_RED, 0
 
-mondata SPECIES_TYPHLOSION_HISUIAN, "-----"
+mondata SPECIES_TYPHLOSION_HISUIAN, "Typhlosion"
     basestats 73, 84, 78, 95, 119, 85
     types TYPE_FIRE, TYPE_GHOST
     catchrate 45
@@ -26690,7 +26690,7 @@ mondata SPECIES_TYPHLOSION_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_YELLOW, 0
 
-mondata SPECIES_QWILFISH_HISUIAN, "-----"
+mondata SPECIES_QWILFISH_HISUIAN, "Qwilfish"
     basestats 65, 95, 85, 85, 55, 55
     types TYPE_DARK, TYPE_POISON
     catchrate 235
@@ -26706,7 +26706,7 @@ mondata SPECIES_QWILFISH_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_GRAY, 0
 
-mondata SPECIES_SNEASEL_HISUIAN, "-----"
+mondata SPECIES_SNEASEL_HISUIAN, "Sneasel"
     basestats 55, 95, 55, 115, 35, 75
     types TYPE_FIGHTING, TYPE_POISON
     catchrate 235
@@ -26722,7 +26722,7 @@ mondata SPECIES_SNEASEL_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLACK, 1
 
-mondata SPECIES_SAMUROTT_HISUIAN, "-----"
+mondata SPECIES_SAMUROTT_HISUIAN, "Samurott"
     basestats 90, 108, 80, 85, 100, 65
     types TYPE_WATER, TYPE_DARK
     catchrate 55
@@ -26738,7 +26738,7 @@ mondata SPECIES_SAMUROTT_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_LILLIGANT_HISUIAN, "-----"
+mondata SPECIES_LILLIGANT_HISUIAN, "Lilligant"
     basestats 70, 105, 75, 105, 50, 75
     types TYPE_GRASS, TYPE_FIGHTING
     catchrate 135
@@ -26754,7 +26754,7 @@ mondata SPECIES_LILLIGANT_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_EGG, 0
 
-mondata SPECIES_ZORUA_HISUIAN, "-----"
+mondata SPECIES_ZORUA_HISUIAN, "Zorua"
     basestats 35, 60, 40, 70, 85, 40
     types TYPE_NORMAL, TYPE_GHOST
     catchrate 215
@@ -26770,7 +26770,7 @@ mondata SPECIES_ZORUA_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_GRAY, 0
 
-mondata SPECIES_ZOROARK_HISUIAN, "-----"
+mondata SPECIES_ZOROARK_HISUIAN, "Zoroark"
     basestats 55, 100, 60, 110, 125, 60
     types TYPE_NORMAL, TYPE_GHOST
     catchrate 115
@@ -26786,7 +26786,7 @@ mondata SPECIES_ZOROARK_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_GRAY, 0
 
-mondata SPECIES_BRAVIARY_HISUIAN, "-----"
+mondata SPECIES_BRAVIARY_HISUIAN, "Braviary"
     basestats 110, 83, 70, 65, 112, 70
     types TYPE_PSYCHIC, TYPE_FLYING
     catchrate 135
@@ -26802,7 +26802,7 @@ mondata SPECIES_BRAVIARY_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_RED, 0
 
-mondata SPECIES_SLIGGOO_HISUIAN, "-----"
+mondata SPECIES_SLIGGOO_HISUIAN, "Sliggoo"
     basestats 58, 75, 83, 40, 83, 113
     types TYPE_STEEL, TYPE_DRAGON
     catchrate 55
@@ -26818,7 +26818,7 @@ mondata SPECIES_SLIGGOO_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_PURPLE, 0
 
-mondata SPECIES_GOODRA_HISUIAN, "-----"
+mondata SPECIES_GOODRA_HISUIAN, "Goodra"
     basestats 80, 100, 100, 60, 110, 150
     types TYPE_STEEL, TYPE_DRAGON
     catchrate 55
@@ -26834,7 +26834,7 @@ mondata SPECIES_GOODRA_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_PURPLE, 0
 
-mondata SPECIES_AVALUGG_HISUIAN, "-----"
+mondata SPECIES_AVALUGG_HISUIAN, "Avalugg"
     basestats 95, 127, 184, 38, 34, 36
     types TYPE_ICE, TYPE_ROCK
     catchrate 55
@@ -26850,7 +26850,7 @@ mondata SPECIES_AVALUGG_HISUIAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_DECIDUEYE_HISUIAN, "-----"
+mondata SPECIES_DECIDUEYE_HISUIAN, "Decidueye"
     basestats 88, 112, 80, 60, 95, 95
     types TYPE_GRASS, TYPE_FIGHTING
     catchrate 55
@@ -26946,7 +26946,7 @@ mondata SPECIES_AVALUGG_LORD, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_UNFEZANT_FEMALE, "-----"
+mondata SPECIES_UNFEZANT_FEMALE, "Unfezant"
     basestats 80, 115, 80, 93, 65, 55
     types TYPE_NORMAL, TYPE_FLYING
     catchrate 45
@@ -26962,7 +26962,7 @@ mondata SPECIES_UNFEZANT_FEMALE, "-----"
     runchance 0
     colorflip BODY_COLOR_GRAY, 0
 
-mondata SPECIES_FRILLISH_FEMALE, "-----"
+mondata SPECIES_FRILLISH_FEMALE, "Frillish"
     basestats 55, 40, 50, 40, 65, 85
     types TYPE_WATER, TYPE_GHOST
     catchrate 190
@@ -26978,7 +26978,7 @@ mondata SPECIES_FRILLISH_FEMALE, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_JELLICENT_FEMALE, "-----"
+mondata SPECIES_JELLICENT_FEMALE, "Jellicent"
     basestats 100, 60, 70, 60, 85, 105
     types TYPE_WATER, TYPE_GHOST
     catchrate 60
@@ -26994,7 +26994,7 @@ mondata SPECIES_JELLICENT_FEMALE, "-----"
     runchance 0
     colorflip BODY_COLOR_WHITE, 0
 
-mondata SPECIES_PYROAR_FEMALE, "-----"
+mondata SPECIES_PYROAR_FEMALE, "Pyroar"
     basestats 86, 68, 72, 106, 109, 66
     types TYPE_FIRE, TYPE_NORMAL
     catchrate 65
@@ -27010,7 +27010,7 @@ mondata SPECIES_PYROAR_FEMALE, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_MEOWSTIC_FEMALE, "-----"
+mondata SPECIES_MEOWSTIC_FEMALE, "Meowstic"
     basestats 74, 48, 76, 104, 83, 81
     types TYPE_PSYCHIC, TYPE_PSYCHIC
     catchrate 75
@@ -27026,7 +27026,7 @@ mondata SPECIES_MEOWSTIC_FEMALE, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_INDEEDEE_FEMALE, "-----"
+mondata SPECIES_INDEEDEE_FEMALE, "Indeedee"
     basestats 60, 65, 55, 95, 105, 95
     types TYPE_PSYCHIC, TYPE_NORMAL
     catchrate 30
@@ -27042,7 +27042,7 @@ mondata SPECIES_INDEEDEE_FEMALE, "-----"
     runchance 0
     colorflip BODY_COLOR_PURPLE, 0
 
-mondata SPECIES_BASCULEGION_FEMALE, "-----"
+mondata SPECIES_BASCULEGION_FEMALE, "Basclegion"
     basestats 120, 112, 65, 78, 80, 75
     types TYPE_WATER, TYPE_GHOST
     catchrate 135
@@ -27202,7 +27202,7 @@ mondata SPECIES_GIMMIGHOUL_ROAMING, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_WOOPER_PALDEAN, "-----"
+mondata SPECIES_WOOPER_PALDEAN, "Wooper"
     basestats 55, 45, 45, 15, 25, 25
     types TYPE_POISON, TYPE_GROUND
     catchrate 255
@@ -27218,7 +27218,7 @@ mondata SPECIES_WOOPER_PALDEAN, "-----"
     runchance 0
     colorflip BODY_COLOR_BLUE, 0
 
-mondata SPECIES_TAUROS_COMBAT, "-----"
+mondata SPECIES_TAUROS_COMBAT, "Tauros"
     basestats 75, 110, 105, 100, 60, 70
     types TYPE_FIGHTING, TYPE_FIGHTING
     catchrate 45
@@ -27234,7 +27234,7 @@ mondata SPECIES_TAUROS_COMBAT, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_TAUROS_BLAZE, "-----"
+mondata SPECIES_TAUROS_BLAZE, "Tauros"
     basestats 75, 110, 105, 100, 60, 70
     types TYPE_FIGHTING, TYPE_FIRE
     catchrate 45
@@ -27250,7 +27250,7 @@ mondata SPECIES_TAUROS_BLAZE, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_TAUROS_AQUA, "-----"
+mondata SPECIES_TAUROS_AQUA, "Tauros"
     basestats 75, 110, 105, 100, 60, 70
     types TYPE_FIGHTING, TYPE_WATER
     catchrate 45
@@ -27266,7 +27266,7 @@ mondata SPECIES_TAUROS_AQUA, "-----"
     runchance 0
     colorflip BODY_COLOR_BROWN, 0
 
-mondata SPECIES_OINKOLOGNE_FEMALE, "-----"
+mondata SPECIES_OINKOLOGNE_FEMALE, "Oinkologne"
     basestats 110, 100, 75, 65, 59, 80
     types TYPE_NORMAL, TYPE_NORMAL
     catchrate 100

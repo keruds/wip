@@ -377,17 +377,17 @@ trainerdata 8, "Joey"
         // mon 0
         ivs 255
         abilityslot 0
-        level 6
+        level 5
         pokemon SPECIES_RATTATA
         item ITEM_NONE
-        move MOVE_NONE
-        move MOVE_NONE
-        move MOVE_NONE
+        move MOVE_TACKLE
+        move MOVE_TAIL_WHIP
+        move MOVE_QUICK_ATTACK
         move MOVE_NONE
         ability ABILITY_RUN_AWAY
-        setivs 0, 0, 0, 0, 0, 0
+        setivs 10, 10, 10, 10, 10, 10
         setevs 0, 0, 0, 0, 0, 0
-        nature NATURE_RELAXED
+        nature NATURE_HARDY
         ballseal 0
 
         // mon 1
@@ -396,14 +396,14 @@ trainerdata 8, "Joey"
         level 5
         monwithform SPECIES_RATTATA, 1
         item ITEM_NONE
-        move MOVE_NONE
-        move MOVE_NONE
-        move MOVE_NONE
+        move MOVE_BITE
+        move MOVE_TAIL_WHIP
+        move MOVE_QUICK_ATTACK
         move MOVE_NONE
         ability ABILITY_RUN_AWAY
-        setivs 0, 0, 0, 0, 0, 0
+        setivs 10, 10, 10, 10, 10, 10
         setevs 0, 0, 0, 0, 0, 0
-        nature NATURE_HASTY
+        nature NATURE_HARDY
         ballseal 0
 
     endparty
@@ -26040,8 +26040,8 @@ trainerdata 495, "Boy"
         level 5
         pokemon SPECIES_CHIKORITA
         item ITEM_NONE
-        move MOVE_NONE
-        move MOVE_NONE
+        move MOVE_TACKLE
+        move MOVE_GROWL
         move MOVE_NONE
         move MOVE_NONE
         ability ABILITY_OVERGROW
@@ -26071,8 +26071,8 @@ trainerdata 496, "Boy"
         level 5
         pokemon SPECIES_CYNDAQUIL
         item ITEM_NONE
-        move MOVE_NONE
-        move MOVE_NONE
+        move MOVE_TACKLE
+        move MOVE_LEER
         move MOVE_NONE
         move MOVE_NONE
         ability ABILITY_BLAZE
@@ -26102,8 +26102,8 @@ trainerdata 497, "Boy"
         level 5
         pokemon SPECIES_TOTODILE
         item ITEM_NONE
-        move MOVE_NONE
-        move MOVE_NONE
+        move MOVE_SCRATCH
+        move MOVE_LEER
         move MOVE_NONE
         move MOVE_NONE
         ability ABILITY_SHEER_FORCE

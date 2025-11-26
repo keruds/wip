@@ -1114,7 +1114,7 @@ trainerdata 20, "Falkner"
         // mon 2
         ivs 255
         abilityslot 0
-        level 13
+        level 14
         pokemon SPECIES_GLIGAR
         item ITEM_TOXIC_ORB
         move MOVE_QUICK_ATTACK
@@ -1130,7 +1130,7 @@ trainerdata 20, "Falkner"
         // mon 3
         ivs 255
         abilityslot 0
-        level 12
+        level 14
         pokemon SPECIES_MURKROW
         item ITEM_BERRY_JUICE
         move MOVE_WING_ATTACK
@@ -1146,7 +1146,7 @@ trainerdata 20, "Falkner"
         // mon 4
         ivs 255
         abilityslot 0
-        level 13
+        level 15
         pokemon SPECIES_DUCKLETT
         item ITEM_EXPERT_BELT
         move MOVE_WATER_PULSE
@@ -1162,7 +1162,7 @@ trainerdata 20, "Falkner"
         // mon 5
         ivs 255
         abilityslot 0
-        level 13
+        level 15
         pokemon SPECIES_WATTREL
         item ITEM_WISE_GLASSES
         move MOVE_PLUCK

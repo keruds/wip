@@ -2379,13 +2379,13 @@ movedata MOVE_SPORE, "Spore"
     movedescription MOVE_SPORE, "The user scatters\nbursts of spores\nthat induce sleep.\n\n"
 
 movedata MOVE_FLASH, "Flash"
-    battleeffect MOVE_EFFECT_ATK_DOWN
-    pss SPLIT_STATUS
+    battleeffect MOVE_EFFECT_LOWER_ATTACK_HIT
+    pss SPLIT_SPECIAL
     basepower 60
     type TYPE_ELECTRIC
     accuracy 100
     pp 20
-    effectchance 0
+    effectchance 20
     target RANGE_SINGLE_TARGET
     priority 0
     flags FLAG_HIDE_SHADOW | FLAG_MIRROR_MOVE | FLAG_MAGIC_COAT | FLAG_PROTECT | FLAG_UNUSABLE_IN_GEN_8 | FLAG_UNUSABLE_IN_GEN_9

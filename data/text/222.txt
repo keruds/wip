@@ -48,7 +48,7 @@ Protein
 Iron
 Carbos
 Calcium
-Infinite Candy
+Rare Candy
 PP Up
 Zinc
 PP Max

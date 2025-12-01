@@ -43,7 +43,7 @@ const struct BadgeMartItems sBadgeMart[] = {
 void LONG_CALL InitMartUI(void *taskManager, FieldSystem *fieldSystem, const u16 *items, int kind, int buySell, int decoWhich, const struct MartItem *priceOverrides);
 
 u16 sCherrygroveCityMart[] = {
-    ITEM_AIR_MAIL, ITEM_HEAL_BALL, 0xFFFF
+    ITEM_RARE_CANDY, ITEM_ABILITY_CAPSULE, 0xFFFF
 };
 
 u16 sVioletCityMart[] = {

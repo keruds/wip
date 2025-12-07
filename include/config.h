@@ -16,7 +16,8 @@
 // START_ADDRESS defines the file address within the synthetic overlay where you would like to place all of the code that this project uses.  this is largely the repointed tables that the code uses.
 // if START_ADDRESS is 0x10000, then the tables will be inserted at address 0x10000 of the synthetic overlay
 // the current implementation (with all gen 5 mons) uses ~9222/0x2406 bytes.  make sure this points to that much free space (probably allow for a little bit more than that)
-#define START_ADDRESS 0x0
+// currently 0x10 to have space for a marker for DSPRE to disable editors!
+#define START_ADDRESS 0x10
 
 // ALLOW_SAVE_CHANGES will allow save file field expansions for full feature implementation, but will break compatibility with PKHeX
 // commenting out this define will disable kyurem's forme change method and keep saves compatible with pkhex
@@ -58,6 +59,7 @@
 
 // IMPLEMENT_WILD_DOUBLE_BATTLES defines whether or not grass tiles will have a 10% chance of starting a wild double battle
 // commenting this line out disables wild double battles entirely
+// NOTE:  wild double battles are currently unstable and broken.  i would not use them at this time.  see this issue for updates on this problem: https://github.com/BluRosie/hg-engine/issues/86
 //#define IMPLEMENT_WILD_DOUBLE_BATTLES
 
 // IMPLEMENT_CAPTURE_EXPERIENCE defines whether or not capturing wild pokemon will net experience
@@ -79,10 +81,10 @@
 // uncommenting IMPLEMENT_LEVEL_CAP enables the level cap system.  make sure to also uncomment LEVEL_CAP_VARIABLE in the process
 // uncommenting UNCAP_CANDIES_FROM_LEVEL_CAP will allow for rare candies to not be capped by the level cap even with the level cap in place, like run & bun
 // uncommenting ALLOW_LEVEL_CAP_EVOLVE will allow for rare candies to evolve pokemon already at the level cap that can evolve at that level already
-//#define IMPLEMENT_LEVEL_CAP
-//#define LEVEL_CAP_VARIABLE 0x416F
+#define IMPLEMENT_LEVEL_CAP
+#define LEVEL_CAP_VARIABLE 0x416F
 //#define UNCAP_CANDIES_FROM_LEVEL_CAP
-//#define ALLOW_LEVEL_CAP_EVOLVE
+#define ALLOW_LEVEL_CAP_EVOLVE
 
 // System flags that need to be enabled for the player to use the gimmick. If you want to change them, remember to change them in flags.s as well for consistency
 #define FLAG_MEGA_EVOLUTION_ENABLED 2518
@@ -105,7 +107,7 @@
 // IMPLEMENT_DYNAMIC_WILD_SPECIES_FORMS allows wild species to appear with different forms if it has multiple forms.
 // Normally you will use monwithform, encounterwithform, headbuttencounterwithform to specify different forms (similar to Gen 5+)
 // Uncomment this line to enable this functionality
-// #define IMPLEMENT_DYNAMIC_WILD_SPECIES_FORMS
+#define IMPLEMENT_DYNAMIC_WILD_SPECIES_FORMS
 
 // Some forms only exist in their debut games, with accompying mechanics. IMPLEMENT_GONE_SPECIES_MECHANICS lets these forms' mechanics coexist with the latest mechanics. Examples include Noble Pokémon
 #define IMPLEMENT_DEXIT_FORMS_MECHANICS
@@ -117,7 +119,7 @@
 // SHINY_ODDS are the odds that a pokémon will be shiny.  actual odds are SHINY_ODDS over 65,536, by default 8 / 65536 or 1 / 8192
 // note that changing this still has no chance of spawning shiny mons in for trainers like the tutorial's method does
 // this will change existing mons too!  if you want to change the odds of wild mons only, you will have to add a certain amount of pid rerolls to the AddWildPartyPokemon routine
-#define SHINY_ODDS 8
+#define SHINY_ODDS 16
 
 // FRIENDSHIP_EVOLUTION_THRESHOLD defines the amount of friendship needed to evolve mons with friendship-related evolutions
 // modern generations have this value at 160, older ones at 220.  still max out at 255
@@ -125,7 +127,7 @@
 
 // Friendship grants additional bonuses.
 // Comment out the line below to revert back to Gen 5- behaviour
-#define FRIENDSHIP_EFFECTS
+//#define FRIENDSHIP_EFFECTS
 
 // RESTORE_ITEMS_AT_BATTLE_END will restore held items that are single-use at the end of battle (Gen 9)
 // comment out the line below to revert back to Gen 8- behavior
@@ -139,8 +141,6 @@
 
 // CORROSIVE_GAS_IMPLIED_BEHAVIOUR defines the behavior that Corrosive Gas should exhibit, where it either does it does not affect a Kyogre, a Groudon, or species holding their respective Mega Stones to not lose their Blue Orb, Red Orb, and Mega Stones respectively (TRUE), or affects species in the above cases (FALSE).
 #define CORROSIVE_GAS_IMPLIED_BEHAVIOUR TRUE
-
-#define IMPLEMENT_FORM_REVERSION TRUE
 
 // SNOW_WARNING_GENERATION controls whether to summon Snow or Hail when the ability is activated.
 // 9 or above: Snow
@@ -175,5 +175,9 @@
 // to more closely match later generations. Note that disabling this will break TMs > 99 rendering in the bag
 // Comment out the line below to disable this feature
 #define UPDATE_MACHINE_MOVE_LABELS
+
+// INCLUDE_LURE_PARK_SPORTS_BALL_CALCULATION includes assumed parameter calculations for the Sport Ball,
+// Park Ball, and Lure Ball.  Comment this line to make the balls behave as they do in Gen 9
+#define INCLUDE_LURE_PARK_SPORTS_BALL_CALCULATION
 
 #endif

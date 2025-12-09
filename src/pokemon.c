@@ -3,7 +3,6 @@
 #include "../include/battle.h"
 #include "../include/config.h"
 #include "../include/debug.h"
-#include "../include/move_relearner.h"
 #include "../include/overlay.h"
 #include "../include/pokemon.h"
 #include "../include/rtc.h"

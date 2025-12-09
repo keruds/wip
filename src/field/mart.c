@@ -47,7 +47,7 @@ u16 sCherrygroveCityMart[] = {
 };
 
 u16 sVioletCityMart[] = {
-    ITEM_BOTTLE_CAP, ITEM_MUSCLE_BAND, ITEM_WISE_GLASSES, 0xFFFF
+    ITEM_HEART_SCALE, ITEM_MUSCLE_BAND, ITEM_WISE_GLASSES, ITEM_ORAN_BERRY, 0xFFFF
 };
 
 u16 sAzaleaCityMart[] = {

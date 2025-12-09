@@ -1,6 +1,17 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+
+// FLAGS 2570-2590 berry trees
+
+#define RANDOM_3_MAX_IVS
+#define RANDOM_3_MAX_IVS_FLAG 2599
+
+#define RANDOMIZE_EGG
+#define RANDOMIZE_EGG_FLAG 2598
+
+
+
 #define GEN_LATEST 9
 
 // FAIRY_TYPE_IMPLEMENTED should be used if you want to implement the fairy type and overwrite type 9 in this project
@@ -154,7 +165,7 @@
 #define UPDATE_VITAMIN_EV_CAPS
 
 // DISABLE_ITEMS_IN_TRAINER_BATTLE will disable the usage of items in trainer battles. This is also true for the AI.
-//#define DISABLE_ITEMS_IN_TRAINER_BATTLE
+#define DISABLE_ITEMS_IN_TRAINER_BATTLE
 
 // REUSABLE_TMS will make TMs infinite and hide the quantity number.
 #define REUSABLE_TMS

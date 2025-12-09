@@ -13,9 +13,6 @@
 #define POKEMON_GENDER_FEMALE 1
 #define POKEMON_GENDER_UNKNOWN 2
 
-#define MOVE_APPEND_FULL    0xFFFFu
-#define MOVE_APPEND_KNOWN   0xFFFEu
-
 #define MONS_MALE       (0)
 #define MONS_FEMALE     (254)
 #define MONS_UNKNOWN    (255)
@@ -869,6 +866,8 @@ typedef struct WildEncounterWork
     u16 minLevel;
 } WildEncounterWork;
 
+
+void LONG_CALL arrayShuffle(u8 array[], int n);
 
 /**
  *  @brief allocate enough space for a PartyPokemon and zero it out

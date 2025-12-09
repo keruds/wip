@@ -112,11 +112,11 @@ Gym Leader
 Elder
 Elite Four
 Scientist
-Executive
+Team Rocket Executive
 Boarder
-Executive
-Executive
-Executive
+Team Rocket Executive
+Team Rocket Executive
+Team Rocket Executive
 Passerby
 Mystery Man
 Double Team

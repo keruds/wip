@@ -9,7 +9,7 @@
 .include "asm/include/moves.inc"
 
 .create "build/move/move_anim/0_712", 0
-
+//accelrock
 a010_712:
 initspriteresource
     loadspriteresource 0

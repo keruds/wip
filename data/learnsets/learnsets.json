@@ -46361,7 +46361,7 @@
       },
       {
         "Level": 11,
-        "Move": "MOVE_ACCELEROCK"
+        "Move": "MOVE_PROTECT"
       },
       {
         "Level": 15,
@@ -93599,7 +93599,7 @@
       },
       {
         "Level": 55,
-        "Move": "MOVE_CROSS_CHOP"
+        "Move": "MOVE_SUPERPOWER"
       }
     ],
     "MachineMoves": [

@@ -46360,8 +46360,8 @@
         "Move": "MOVE_ROCK_THROW"
       },
       {
-        "Level": 12,
-        "Move": "MOVE_PROTECT"
+        "Level": 11,
+        "Move": "MOVE_ACCELEROCK"
       },
       {
         "Level": 15,
@@ -93599,7 +93599,7 @@
       },
       {
         "Level": 55,
-        "Move": "MOVE_SUPERPOWER"
+        "Move": "MOVE_CROSS_CHOP"
       }
     ],
     "MachineMoves": [

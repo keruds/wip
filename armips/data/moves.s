@@ -4897,7 +4897,7 @@ movedata MOVE_POISON_FANG, "Poison Fang"
     type TYPE_POISON
     accuracy 100
     pp 15
-    effectchance 50
+    effectchance 30
     target RANGE_SINGLE_TARGET
     priority 0
     flags FLAG_MIRROR_MOVE | FLAG_PROTECT | FLAG_CONTACT

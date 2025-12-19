@@ -887,7 +887,7 @@ int LONG_CALL BattleAI_CalcBaseDamage(void *bw, struct BattleStruct *sp, int mov
     // handle Thick Club
     if ((attacker->item_held_effect == HOLD_EFFECT_CUBONE_ATK_UP)
         && ((attacker->species == SPECIES_CUBONE) || (attacker->species == SPECIES_MAROWAK))
-        // it’s not a Ditto/Smeargle/Mew Transformed into the species
+        // itï¿½s not a Ditto/Smeargle/Mew Transformed into the species
         && !(attacker->condition2 & STATUS2_TRANSFORMED)
         && (movesplit == SPLIT_PHYSICAL)) {
         attackModifier = QMul_RoundUp(attackModifier, UQ412__2_0);
@@ -896,7 +896,7 @@ int LONG_CALL BattleAI_CalcBaseDamage(void *bw, struct BattleStruct *sp, int mov
     // handle Deep Sea Tooth
     if ((attacker->item_held_effect == HOLD_EFFECT_CLAMPERL_SPATK)
         && (attacker->species == SPECIES_CLAMPERL)
-        // it’s not a Ditto/Smeargle/Mew Transformed into the species
+        // itï¿½s not a Ditto/Smeargle/Mew Transformed into the species
         && !(attacker->condition2 & STATUS2_TRANSFORMED)
         && (movesplit == SPLIT_SPECIAL)) {
         attackModifier = QMul_RoundUp(attackModifier, UQ412__2_0);
@@ -905,7 +905,7 @@ int LONG_CALL BattleAI_CalcBaseDamage(void *bw, struct BattleStruct *sp, int mov
     // handle Light Ball
     if ((attacker->item_held_effect == HOLD_EFFECT_PIKA_SPATK_UP)
         && (attacker->species == SPECIES_PIKACHU)
-        // it’s not a Ditto/Smeargle/Mew Transformed into the species
+        // itï¿½s not a Ditto/Smeargle/Mew Transformed into the species
         && !(attacker->condition2 & STATUS2_TRANSFORMED)) {
         attackModifier = QMul_RoundUp(attackModifier, UQ412__2_0);
     }
@@ -941,15 +941,15 @@ int LONG_CALL BattleAI_CalcBaseDamage(void *bw, struct BattleStruct *sp, int mov
     }
 
     // Step 4.1. handle Unaware
-    // Step 4.2. Chip Away / Sacred Sword
-    if (attacker->ability == ABILITY_UNAWARE || moveno == MOVE_CHIP_AWAY || moveno == MOVE_SACRED_SWORD) {
+    // Step 4.2. Chip Away / Sacred Sword / Darkest Lariat
+    if (attacker->ability == ABILITY_UNAWARE || moveno == MOVE_CHIP_AWAY || moveno == MOVE_SACRED_SWORD || moveno == MOVE_DARKEST_LARIAT) {
         defender->states[STAT_DEFENSE] = 0;
         defender->states[STAT_SPDEF] = 0;
     }
 
 #ifdef DEBUG_DAMAGE_CALC_AI
     debug_printf("\n=================\n");
-    debug_printf("[CalcBaseDamage] Step 4.2. Chip Away / Sacred Sword\n");
+    debug_printf("[CalcBaseDamage] Step 4.2. Chip Away / Sacred Sword / Darkest Lariat\n");
     debug_printf("[CalcBaseDamage] defender->defstate: %d\n", defender->states[STAT_DEFENSE]);
     debug_printf("[CalcBaseDamage] defender->spdefstate: %d\n", defender->states[STAT_SPDEF]);
 #endif
@@ -1066,8 +1066,8 @@ int LONG_CALL BattleAI_CalcBaseDamage(void *bw, struct BattleStruct *sp, int mov
         evoTable = sys_AllocMemory(0, MAX_EVOS_PER_POKE * sizeof(struct Evolution));
         ArchiveDataLoad(evoTable, ARC_EVOLUTIONS, speciesWithForm);
 
-        // If a Pokémon has any evolutions, there should be an entry at the top that isn't EVO_NONE.
-        // In that case, the Pokémon is capable of evolving, and so the effect of Eviolite should apply.
+        // If a Pokï¿½mon has any evolutions, there should be an entry at the top that isn't EVO_NONE.
+        // In that case, the Pokï¿½mon is capable of evolving, and so the effect of Eviolite should apply.
         if (evoTable[0].method != EVO_NONE) {
             defenseModifier = QMul_RoundUp(defenseModifier, UQ412__1_5);
         }
@@ -1083,7 +1083,7 @@ int LONG_CALL BattleAI_CalcBaseDamage(void *bw, struct BattleStruct *sp, int mov
     // handle Deep Sea Scale
     if ((defender->item_held_effect == HOLD_EFFECT_CLAMPERL_SPDEF)
         && (defender->species == SPECIES_CLAMPERL)
-        // it’s not a Ditto/Smeargle/Mew Transformed into the species
+        // itï¿½s not a Ditto/Smeargle/Mew Transformed into the species
         && !(defender->condition2 & STATUS2_TRANSFORMED)
         && (movesplit == SPLIT_SPECIAL)) {
         defenseModifier = QMul_RoundUp(defenseModifier, UQ412__2_0);
@@ -1092,7 +1092,7 @@ int LONG_CALL BattleAI_CalcBaseDamage(void *bw, struct BattleStruct *sp, int mov
     // handle Metal Powder
     if ((defender->item_held_effect == HOLD_EFFECT_DITTO_DEF_UP)
         && (defender->species == SPECIES_DITTO)
-        // it’s not a Ditto/Smeargle/Mew Transformed into the species
+        // itï¿½s not a Ditto/Smeargle/Mew Transformed into the species
         && !(defender->condition2 & STATUS2_TRANSFORMED)
         && (movesplit == SPLIT_PHYSICAL)) {
         defenseModifier = QMul_RoundUp(defenseModifier, UQ412__2_0);

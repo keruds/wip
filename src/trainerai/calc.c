@@ -455,9 +455,9 @@ int LONG_CALL BattleAI_GetDynamicMoveType(struct BattleSystem *bsys, struct Batt
 
     switch (moveNo) {
     case MOVE_NATURAL_GIFT:
-        //https://github.com/pret/pokeheartgold/blob/29282f7bb45946dee63475022a8d506092bc3748/src/battle/overlay_12_0224E4FC.c#L4600
-        //type = GetNaturalGiftType(ctx, battlerId);
-        type = GetItemData(attacker->item, ITEM_PARAM_NATURAL_POWER_TYPE, 5); //TODO: check heap
+        // https://github.com/pret/pokeheartgold/blob/29282f7bb45946dee63475022a8d506092bc3748/src/battle/overlay_12_0224E4FC.c#L4600
+        // type = GetNaturalGiftType(ctx, battlerId);
+        type = GetItemData(attacker->item, ITEM_PARAM_NATURAL_POWER_TYPE, 5); // TODO: check heap
         break;
     case MOVE_JUDGMENT:
         switch (attacker->item_held_effect) {
@@ -640,12 +640,12 @@ int LONG_CALL BattleAI_GetDynamicMoveType(struct BattleSystem *bsys, struct Batt
                 break;
 
             default:
-                // Aura Wheel can only be successfully used by Morpeko (or a Pokémon that has transformed into Morpeko). This line does not prevent the move from being used!!!
+                // Aura Wheel can only be successfully used by Morpeko (or a Pokï¿½mon that has transformed into Morpeko). This line does not prevent the move from being used!!!
                 type = TYPE_TYPELESS;
                 break;
             }
         } else {
-            // Aura Wheel can only be successfully used by Morpeko (or a Pokémon that has transformed into Morpeko). This line does not prevent the move from being used!!!
+            // Aura Wheel can only be successfully used by Morpeko (or a Pokï¿½mon that has transformed into Morpeko). This line does not prevent the move from being used!!!
             type = TYPE_TYPELESS;
         }
         break;
@@ -757,10 +757,12 @@ int LONG_CALL BattleAI_GetDynamicMoveType(struct BattleSystem *bsys, struct Batt
      if (attacker->ability == ABILITY_LIQUID_VOICE && IsMoveSoundBased(moveNo)) {
         typeLocal = TYPE_WATER;
     }
-
+    // Ion Deluge's effect is applied after all type-modifying abilities have activated.
+    if (typeLocal == TYPE_NORMAL && (ctx->field_condition & FIELD_STATUS_ION_DELUGE) == FIELD_STATUS_ION_DELUGE) {
+        typeLocal = TYPE_ELECTRIC;
+    }
     return typeLocal;
 }
-
 BOOL LONG_CALL CanAttackerOneShotDefender(u32 attackerDamage, u8 split, u32 moveno, struct AI_sDamageCalc *attacker, struct AI_sDamageCalc *defender)
 {
     BOOL isMoveMultihit = IsMultiHitMove(moveno);
@@ -823,6 +825,8 @@ BOOL LONG_CALL IsChoicedMoveConsidedUseless(u32 moveno, u8 split)
     switch (moveno) {
     case MOVE_FAKE_OUT:
     case MOVE_FIRST_IMPRESSION:
+        isUseless = TRUE;
+        break;
     default:
         break;
     }
@@ -934,10 +938,13 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
 
     BOOL isDefenderImmuneToAnyStatus = FALSE;
     if ((ai->defenderMon.condition & STATUS_ALL)
-        || (ai->defenderMon.ability == ABILITY_GOOD_AS_GOLD) || (ai->defenderMon.ability == ABILITY_COMATOSE) || (ai->defenderMon.ability == ABILITY_PURIFYING_SALT)
-        || (ai->defenderMon.ability == ABILITY_SHIELDS_DOWN && ai->defenderMon.percenthp > 50)
-        || (ai->defenderMon.ability == ABILITY_LEAF_GUARD && ctx->field_condition & WEATHER_SUNNY_ANY)
+        || (!ai->attackerMon.hasMoldBreaker
+            && (ai->defenderMon.ability == ABILITY_GOOD_AS_GOLD 
+                || ai->defenderMon.ability == ABILITY_PURIFYING_SALT
+                || (ai->defenderMon.ability == ABILITY_SHIELDS_DOWN && ai->defenderMon.percenthp > 50)
+                || (ai->defenderMon.ability == ABILITY_LEAF_GUARD && ctx->field_condition & WEATHER_SUNNY_ANY)))
         || (ai->defenderMon.ability == ABILITY_HYDRATION && ctx->field_condition & WEATHER_RAIN_ANY)
+        || (ai->defenderMon.ability == ABILITY_COMATOSE)
         || (ctx->side_condition[ai->defenderSide] & SIDE_STATUS_SAFEGUARD)) {
         isDefenderImmuneToAnyStatus = TRUE;
     }
@@ -969,6 +976,17 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
         || ai->defenderMon.ability == ABILITY_VITAL_SPIRIT || ai->defenderMon.ability == ABILITY_INSOMNIA
         || (ai->defenderMon.isGrounded && (ctx->terrainOverlay.type == MISTY_TERRAIN || ctx->terrainOverlay.type == ELECTRIC_TERRAIN))) {
         ai->defenderImmuneToSleep = TRUE;
+    }
+
+     ai->defenderImmuneToStatDrop = FALSE;
+    if (ai->defenderMon.ability == ABILITY_FULL_METAL_BODY 
+        || ai->defenderMon.item_held_effect == HOLD_EFFECT_PREVENT_STAT_DROPS
+        || (!ai->attackerMon.hasMoldBreaker
+            && (ai->defenderMon.ability == ABILITY_CLEAR_BODY
+            || ai->defenderMon.ability == ABILITY_CONTRARY
+            || ai->defenderMon.ability == ABILITY_WHITE_SMOKE)))
+    {
+        ai->defenderImmuneToStatDrop = TRUE;
     }
 
     ai->partySizeAttacker = Battle_GetClientPartySize(bsys, attacker);
@@ -1148,6 +1166,7 @@ int LONG_CALL BattleAI_PostKOSwitchIn_Internal(struct BattleSystem *bsys, int at
 
                     if (attackerMove.split != SPLIT_STATUS && attackerMove.power) {
                         damages.damageRoll = BattleAI_CalcDamage(bsys, ctx, moveno, ctx->side_condition[BATTLER_IS_ENEMY(attacker)], ctx->field_condition, attackerMove.power, attackerMove.type, critical, attacker, defender, &damages, &attackerMon, &defenderMon);
+                        damages.damageRoll = damages.damageRange[15]; // Max Damage
 
                         damages.damageRoll = BattleAI_AdjustUnusualMoveDamage(attackerMon.level, attackerMon.hp, defenderMon.hp, damages.damageRoll, attackerMove.effect, attackerMon.ability, attackerMon.item);
                         for (int u = 0; u < 16; u++) {
@@ -1170,6 +1189,7 @@ int LONG_CALL BattleAI_PostKOSwitchIn_Internal(struct BattleSystem *bsys, int at
 
                 if (defenderMove.split != SPLIT_STATUS && defenderMove.power && ctx->battlemon[defender].pp[k]) {
                     damages.damageRoll = BattleAI_CalcDamage(bsys, ctx, defenderMoveno, ctx->side_condition[BATTLER_IS_ENEMY(defender)], ctx->field_condition, defenderMove.power, defenderMove.type, critical, defender, attacker, &damages, &defenderMon, &attackerMon);
+                    damages.damageRoll = damages.damageRange[15]; // Max Damage
 
                     damages.damageRoll = BattleAI_AdjustUnusualMoveDamage(defenderMon.level, defenderMon.hp, attackerMon.hp, damages.damageRoll, defenderMove.effect, defenderMon.ability, defenderMon.item);
                     for (int u = 0; u < 16; u++) {

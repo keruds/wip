@@ -5,6 +5,7 @@
 // unused
 
 _000:
+	AbilityPopup BATTLER_CATEGORY_MSG_BATTLER_TEMP
     PrintAttackMessage 
     Wait 
     WaitButtonABTime 15

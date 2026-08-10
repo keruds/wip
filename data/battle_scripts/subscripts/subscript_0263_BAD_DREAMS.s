@@ -3,7 +3,7 @@
 .data
 
 _000:
-    AbilityPopup BATTLER_CATEGORY_ATTACKER
+    AbilityPopup BATTLER_CATEGORY_MSG_BATTLER_TEMP
     // {0} is tormented!
     PrintMessage 1121, TAG_NICKNAME, BATTLER_CATEGORY_MSG_BATTLER_TEMP
     Wait 

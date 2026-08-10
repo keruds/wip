@@ -43,7 +43,6 @@ void LONG_CALL FillDamageStructFromPartyMon(void *bw UNUSED, struct BattleStruct
     monStruct->type2 = GetMonData(pp, MON_DATA_TYPE_2, 0);
     monStruct->type3 = TYPE_TYPELESS;
 
-
     monStruct->condition = GetMonData(pp, MON_DATA_STATUS, 0);
     monStruct->condition2 = 0;
     monStruct->isGrounded = IsPartyPokemonGrounded(sp, pp);
@@ -86,6 +85,12 @@ void LONG_CALL FillDamageStructFromPartyMon(void *bw UNUSED, struct BattleStruct
     monStruct->lastResortCount = 0;
     monStruct->attackerHasMoveFailureLastTurn = 0;
     monStruct->canBelch = 0; // sp->onceOnlyMoveConditionFlags[SanitizeClientForTeamAccess(bw, attackerPos)][partyPos].berryEatenAndCanBelch;
+    monStruct->paradoxBoostedStat = 0;
+    if ((monStruct->ability == ABILITY_PROTOSYNTHESIS && ((sp->field_condition & WEATHER_SUNNY_ANY) || monStruct->item == ITEM_BOOSTER_ENERGY))
+        || (monStruct->ability == ABILITY_QUARK_DRIVE && ((sp->terrainOverlay.type == ELECTRIC_TERRAIN && sp->terrainOverlay.numberOfTurnsLeft) || monStruct->item == ITEM_BOOSTER_ENERGY)))
+    {
+        monStruct->paradoxBoostedStat = BattleAI_GetHighestParadoxStat(monStruct->attack, monStruct->defense, monStruct->sp_attack, monStruct->sp_defense, monStruct->speed);
+    }
 }
 
 void LONG_CALL FillDamageStructFromBattleMon(void *bw, struct BattleStruct *sp, struct AI_sDamageCalc *monStruct, int numSlot)
@@ -155,18 +160,34 @@ void LONG_CALL FillDamageStructFromBattleMon(void *bw, struct BattleStruct *sp, 
     monStruct->lastResortCount = sp->battlemon[numSlot].moveeffect.lastResortCount;
     monStruct->attackerHasMoveFailureLastTurn = sp->moveConditionsFlags[numSlot].moveFailureLastTurn;
     monStruct->canBelch = 0; // sp->onceOnlyMoveConditionFlags[SanitizeClientForTeamAccess(bw, numSlot)][sp->sel_mons_no[numSlot]].berryEatenAndCanBelch;
+    monStruct->paradoxBoostedStat = sp->paradoxBoostedStat[numSlot];
 }
 
-u8 LONG_CALL BattleAI_UpdateTypeEffectiveness(u32 move_no, u32 held_effect UNUSED, u8 defender_type, u8 defaultEffectiveness)
+u8 LONG_CALL BattleAI_GetHighestParadoxStat(u8 atk, u8 def, u8 spatk, u8 spdef, u8 speed)
 {
-    if (move_no == MOVE_FREEZE_DRY && defender_type == TYPE_WATER) {
-        defaultEffectiveness = TYPE_MUL_SUPER_EFFECTIVE;
-    }
+    u8 highestId = STAT_ATTACK;
+    u16 highestStat = atk;
 
-    return defaultEffectiveness;
+    if (highestStat < def) {
+        highestId = STAT_DEFENSE;
+        highestStat = def;
+    }
+    if (highestStat < spatk) {
+        highestId = STAT_SPATK;
+        highestStat = spatk;
+    }
+    if (highestStat < spdef) {
+        highestId = STAT_SPDEF;
+        highestStat = spdef;
+    }
+    if (highestStat < speed) {
+        highestId = STAT_SPEED;
+        highestStat = speed;
+    }
+    return highestId;
 }
 
-int LONG_CALL BattleAI_GetTypeEffectiveness(void *bw, struct BattleStruct *sp, int moveno, int move_type, u32 *flag UNUSED, struct AI_sDamageCalc *attacker, struct AI_sDamageCalc *defender)
+int LONG_CALL BattleAI_GetTypeEffectiveness(void *bw, struct BattleStruct *sp, int moveno, int move_type, u8 attackerSlot, u8 defenderSlot, struct AI_sDamageCalc *attacker, struct AI_sDamageCalc *defender)
 {
     int typeTableEntryNo = 0; // Used to cycle through all (non-neutral) type interactions.
 
@@ -182,6 +203,10 @@ int LONG_CALL BattleAI_GetTypeEffectiveness(void *bw, struct BattleStruct *sp, i
     u32 type1Effectiveness_Dual = TYPE_MUL_NORMAL;
     u32 type2Effectiveness_Dual = TYPE_MUL_NORMAL;
     u32 type3Effectiveness_Dual = TYPE_MUL_NORMAL;
+
+    if (HasMovePranksterPriority(bw, attackerSlot, moveno, attacker->ability, defenderSlot) && HasType(sp, defenderSlot, TYPE_DARK)) {
+        return TYPE_MUL_NO_EFFECT;
+    }
 
     // [0]: Attacking type
     // [1]: Defending type
@@ -370,6 +395,19 @@ BOOL LONG_CALL IsMoveUsefulSoundMove(u32 moveno)
     }
 }
 
+BOOL LONG_CALL IsMoveValidSwitchingMove(u32 moveno)
+{
+    switch (moveno) {
+    case MOVE_FLIP_TURN:
+    case MOVE_U_TURN:
+    case MOVE_VOLT_SWITCH:
+    case MOVE_PARTING_SHOT:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 BOOL LONG_CALL IsMoveForceSwitching(u32 moveno)
 {
     switch (moveno) {
@@ -383,7 +421,7 @@ BOOL LONG_CALL IsMoveForceSwitching(u32 moveno)
     }
 }
 
-int LONG_CALL BattleAI_AdjustUnusualMoveDamage(struct AI_sDamageCalc *attacker, struct AI_sDamageCalc *defender, u32 damage, u32 moveEffect, u32 moveno, u32 effectiveness)
+int LONG_CALL BattleAI_AdjustUnusualMoveDamage(struct AI_sDamageCalc *attacker, struct AI_sDamageCalc *defender, u32 damage, u32 moveEffect, u32 moveno UNUSED, u32 effectiveness)
 {
     if (effectiveness == TYPE_MUL_NO_EFFECT) {
         return 0;
@@ -438,25 +476,12 @@ int LONG_CALL BattleAI_AdjustUnusualMoveDamage(struct AI_sDamageCalc *attacker, 
     }
     case MOVE_EFFECT_ONE_HIT_KO: // sheer cold, guillotine, horn drill, fissure
     {
-        if (attacker->level <= defender->level) {
-            return 0;
-        }
+        return defender->hp;
     }
     default:
         break;
     }
 
-    switch (moveno) {
-    case MOVE_SHEER_COLD:
-        if (defender->type1 == TYPE_ICE || defender->type2 == TYPE_ICE || defender->type3 == TYPE_ICE) {
-            return 0;
-        } else {
-            return defender->hp;
-        }
-        break;
-    default:
-        break;
-    }
     return damage;
 }
 
@@ -475,6 +500,7 @@ BOOL LONG_CALL BattleAI_IsKnockOffPoweredUp(struct AI_sDamageCalc *defender)
 int LONG_CALL BattleAI_GetDynamicMoveType(struct BattleSystem *bsys, struct BattleStruct *ctx, struct AI_sDamageCalc *attacker, int moveNo)
 {
     int type = ctx->moveTbl[moveNo].type;
+    u32 weatherAttacker = BattleAI_GetWeather(bsys, ctx, attacker->ability);
 
     switch (moveNo) {
     case MOVE_NATURAL_GIFT:
@@ -545,28 +571,26 @@ int LONG_CALL BattleAI_GetDynamicMoveType(struct BattleSystem *bsys, struct Batt
         type = attacker->hiddenPowerType;
         break;
     case MOVE_WEATHER_BALL:
-        if (!CheckSideAbility(bsys, ctx, CHECK_ABILITY_ALL_HP, 0, ABILITY_CLOUD_NINE) && !CheckSideAbility(bsys, ctx, CHECK_ABILITY_ALL_HP, 0, ABILITY_AIR_LOCK)) {
-            if (ctx->field_condition & FIELD_CONDITION_WEATHER) {
-                if (ctx->field_condition & WEATHER_RAIN_ANY) {
-                    type = TYPE_WATER;
-                }
-                if (ctx->field_condition & WEATHER_SANDSTORM_ANY) {
-                    type = TYPE_ROCK;
-                }
-                if (ctx->field_condition & WEATHER_SUNNY_ANY) {
-                    type = TYPE_FIRE;
-                }
-                if (ctx->field_condition & WEATHER_HAIL_ANY) {
-                    type = TYPE_ICE;
-                }
-                // BUG: If the weather is foggy, then type doesn't get set properly before being returned
-                // BUGFIX
-                if (ctx->field_condition & FIELD_STATUS_FOG) {
-                    type = TYPE_NORMAL;
-                }
-                if (ctx->field_condition & WEATHER_SHADOWY_AURA_ANY) {
-                    type = TYPE_TYPELESS;
-                }
+        if (weatherAttacker & FIELD_CONDITION_WEATHER) {
+            if (weatherAttacker & WEATHER_RAIN_ANY) {
+                type = TYPE_WATER;
+            }
+            if (weatherAttacker & WEATHER_SANDSTORM_ANY) {
+                type = TYPE_ROCK;
+            }
+            if (weatherAttacker & WEATHER_SUNNY_ANY) {
+                type = TYPE_FIRE;
+            }
+            if (weatherAttacker & WEATHER_HAIL_ANY) {
+                type = TYPE_ICE;
+            }
+            // BUG: If the weather is foggy, then type doesn't get set properly before being returned
+            // BUGFIX
+            if (weatherAttacker & FIELD_STATUS_FOG) {
+                type = TYPE_NORMAL;
+            }
+            if (weatherAttacker & WEATHER_SHADOWY_AURA_ANY) {
+                type = TYPE_TYPELESS;
             }
         }
         break;
@@ -663,12 +687,12 @@ int LONG_CALL BattleAI_GetDynamicMoveType(struct BattleSystem *bsys, struct Batt
                 break;
 
             default:
-                // Aura Wheel can only be successfully used by Morpeko (or a Pok�mon that has transformed into Morpeko). This line does not prevent the move from being used!!!
+                // Aura Wheel can only be successfully used by Morpeko (or a Pokémon that has transformed into Morpeko). This line does not prevent the move from being used!!!
                 type = TYPE_TYPELESS;
                 break;
             }
         } else {
-            // Aura Wheel can only be successfully used by Morpeko (or a Pok�mon that has transformed into Morpeko). This line does not prevent the move from being used!!!
+            // Aura Wheel can only be successfully used by Morpeko (or a Pokémon that has transformed into Morpeko). This line does not prevent the move from being used!!!
             type = TYPE_TYPELESS;
         }
         break;
@@ -767,7 +791,10 @@ int LONG_CALL BattleAI_GetDynamicMoveType(struct BattleSystem *bsys, struct Batt
             typeLocal = TYPE_FLYING;
         } else if (attacker->ability == ABILITY_GALVANIZE) {
             typeLocal = TYPE_ELECTRIC;
-        } else // needs to be for sure initialized
+        } else if (attacker->ability == ABILITY_DRAGONIZE) {
+            typeLocal = TYPE_DRAGON;
+        }
+        else // needs to be for sure initialized
         {
             typeLocal = TYPE_NORMAL;
         }
@@ -790,10 +817,10 @@ int LONG_CALL BattleAI_GetDynamicMoveType(struct BattleSystem *bsys, struct Batt
 
 BOOL LONG_CALL CanAttackerOneShotDefender(u32 attackerDamage, u8 split, u32 moveno, struct AI_sDamageCalc *attacker, struct AI_sDamageCalc *defender)
 {
-    BOOL isMoveMultihit = IsMultiHitMove(moveno);
+    //BOOL isMoveMultihit = IsMultiHitMove(moveno);
     BOOL canOneShot = TRUE;
 
-    if (attackerDamage >= defender->hp) {
+    if (attackerDamage >= defender->hp) { /*
         if (defender->hp == defender->maxhp) {
 
             if (!isMoveMultihit
@@ -806,7 +833,7 @@ BOOL LONG_CALL CanAttackerOneShotDefender(u32 attackerDamage, u8 split, u32 move
                 canOneShot = FALSE;
             }
         }
-
+        */
     } else {
         canOneShot = FALSE;
     }
@@ -877,7 +904,7 @@ BOOL LONG_CALL IsPartyPokemonGrounded(struct BattleStruct *sp, struct PartyPokem
 
     u8 holdeffect = BattleItemDataGet(sp, item, 1);
 
-    if ((GetMonData(pp, MON_DATA_ABILITY, 0) != ABILITY_LEVITATE && holdeffect != HOLD_EFFECT_UNGROUND_DESTROYED_ON_HIT // not holding Air Balloon
+    if ((GetMonData(pp, MON_DATA_ABILITY, 0) != ABILITY_LEVITATE && GetMonData(pp, MON_DATA_ABILITY, 0) != ABILITY_EELEVATE && holdeffect != HOLD_EFFECT_UNGROUND_DESTROYED_ON_HIT // not holding Air Balloon
             && !(GetMonData(pp, MON_DATA_TYPE_1, 0) == TYPE_FLYING) && !(GetMonData(pp, MON_DATA_TYPE_2, 0) == TYPE_FLYING))
         || (holdeffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED // holding Iron Ball
             || (sp->field_condition & FIELD_STATUS_GRAVITY))) {
@@ -887,3 +914,32 @@ BOOL LONG_CALL IsPartyPokemonGrounded(struct BattleStruct *sp, struct PartyPokem
     return FALSE;
 }
 
+u32 LONG_CALL BattleAI_GetWeather(struct BattleSystem *bsys, struct BattleStruct *ctx, int ability)
+{
+    if (ability == ABILITY_MEGA_SOL) {
+        return WEATHER_SUNNY;
+    }
+
+    if (CheckSideAbility(bsys, ctx, CHECK_ABILITY_ALL_HP, 0, ABILITY_CLOUD_NINE) || CheckSideAbility(bsys, ctx, CHECK_ABILITY_ALL_HP, 0, ABILITY_AIR_LOCK)) {
+        return WEATHER_NONE;
+    }
+
+    return ctx->field_condition & FIELD_CONDITION_WEATHER;
+}
+
+
+BOOL LONG_CALL HasMovePranksterPriority(struct BattleSystem *bsys, u8 attacker, u32 attackerMove, u32 attackerAbility, u8 defender)
+{
+    struct BattleStruct *ctx = bsys->sp;
+    struct BattleMove attackerMoveStruct = ctx->moveTbl[attackerMove];
+
+    if (attackerAbility == ABILITY_PRANKSTER
+        && attackerMoveStruct.split == SPLIT_STATUS
+        //&& ctx->clientPriority[attacker] > 0
+        && (attackerMoveStruct.target == RANGE_ADJACENT_OPPONENTS
+            || (attackerMoveStruct.target == RANGE_SINGLE_TARGET
+                && BATTLERS_ON_DIFFERENT_SIDE(attacker, defender)))) {
+        return TRUE;
+    }
+    return FALSE;
+}

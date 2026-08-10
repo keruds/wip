@@ -10,7 +10,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "types.h"
-
+#include "trainer_ai.h"
 #define CLIENT_MAX 4
 
 #define TYPE_NORMAL_INTERNAL   0
@@ -1299,6 +1299,19 @@ typedef struct MagicBounceContext {
 } MagicBounceContext;
 
 
+
+enum AI_calcState {
+    Initial = 0,
+    CalcedEnemy_1_and_3,
+};
+
+typedef struct AI_turnScoring {
+    u8 targets[4];
+    u8 choice[4];
+    int calcState;
+} AI_turnScoring;
+
+
 #define BATTLE_SCRIPT_PUSH_DEPTH 4
 
 /**
@@ -1546,6 +1559,20 @@ struct BattleStruct {
     PursuitContext pursuitContext;
     DancerContext dancerContext;
     MagicBounceContext magicBounceContext;
+
+
+
+
+
+
+
+
+
+
+
+
+
+    AI_turnScoring aiTurnScoring;
 };
 
 enum {
@@ -1717,11 +1744,13 @@ struct BattleSystem {
 
 struct ABILITY_POPUP_WORK {
     struct BattleSystem *bsys;
+    CATS_ACT_PTR icon;
     u16 ability;
     u8 battler;
     u8 side;
     u8 frames;
     u8 step;
+    u8 iconResourcesLoaded;
 };
 
 // Ability Checks - values for flag for CheckSideAbility
@@ -2294,11 +2323,10 @@ extern u16 DynamaxBannedWeightMoveList[6];
 extern struct newBattleStruct newBS;
 extern struct ILLUSION_STRUCT gIllusionStruct;
 
-#define IS_CLIENT_IN_ILLUSION_NO_ABILITY(bsys, client) ( \
-   gIllusionStruct.isSideInIllusion & No2Bit(SanitizeClientForTeamAccess(bsys, client)) \
-&& gIllusionStruct.illusionClient[SanitizeClientForTeamAccess(bsys, client)] == client \
-&& gIllusionStruct.illusionPos[SanitizeClientForTeamAccess(bsys, client)] == bsys->sp->sel_mons_no[client] \
-)
+#define IS_CLIENT_IN_ILLUSION_NO_ABILITY(bsys, client) (                                   \
+    gIllusionStruct.isSideInIllusion & No2Bit(SanitizeClientForTeamAccess(bsys, client))   \
+    && gIllusionStruct.illusionClient[SanitizeClientForTeamAccess(bsys, client)] == client \
+    && gIllusionStruct.illusionPos[SanitizeClientForTeamAccess(bsys, client)] == bsys->sp->sel_mons_no[client])
 
 #define IS_CLIENT_IN_ILLUSION(bsys, client) (IS_CLIENT_IN_ILLUSION_NO_ABILITY(bsys, client) && GetBattlerAbility(bsys->sp, client) == ABILITY_ILLUSION)
 
@@ -4228,6 +4256,7 @@ void LONG_CALL BattleController_EmitPlayFaintAnimation(struct BattleSystem *bsys
 
 void LONG_CALL InitFaintedWork(struct BattleSystem *bsys, struct BattleStruct *ctx, int battlerId);
 
+int GetSanitisedType(int type);
 /**
  * @brief checks if the current move hits any oppsoing battler or ally
  * @param sp global battle structure

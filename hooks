@@ -618,8 +618,9 @@ arm9 GetItemAttr_PreloadedItemData 02077DAC 2
 
 
 
-
-
+# AI
+0012 TrainerAI_PickCommand_hook 0225E10C 0
+0012 BattleAI_PostKOSwitchIn 02258800 2
 # repel
 0001 ClearOverworldRequestFlags 021E6880 1
 # hook from where y button is checked
@@ -694,4 +695,3 @@ arm9 EncounterSlot_WildMonSlotRoll_Headbutt 022477C0 0
 0012 GetPokemon_BallBlocked_hook 02247094 0
 0012 BattleSystem_AdjustMessageForSide 0223C558 2
 
-0012 PlayerTrainerVictoryBGM_hook 0224DA9E 3

@@ -3,7 +3,7 @@
 .data
 
 _000:
-    AbilityPopup BATTLER_CATEGORY_MSG_TEMP
+    AbilityPopup BATTLER_CATEGORY_MSG_BATTLER_TEMP
     // {0} is slow to get going!
     PrintMessage 1112, TAG_NICKNAME_ABILITY, BATTLER_CATEGORY_MSG_TEMP, BATTLER_CATEGORY_MSG_BATTLER_TEMP
     Wait 

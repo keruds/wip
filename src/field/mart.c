@@ -35,7 +35,7 @@ const struct BadgeMartItems sBadgeMart[] = {
     { ITEM_ICE_HEAL,       1 },
     { ITEM_FULL_HEAL,      5 },
     { ITEM_ESCAPE_ROPE,    1 },
-    { ITEM_ORAN_BERRY,     0 },
+    { ITEM_LEPPA_BERRY,     0 },
     { ITEM_SITRUS_BERRY,   3 },
     { ITEM_LUM_BERRY,      5 },
 };

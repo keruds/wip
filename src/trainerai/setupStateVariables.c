@@ -19,7 +19,6 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
     struct BattleStruct *ctx = bsys->sp;
     u8 critical = 0;
     u8 speedCalc;
-    u32 effectivenessFlag = 0;
 
     FillDamageStructFromBattleMon(bsys, ctx, &ai->attackerMon, attacker);
     FillDamageStructFromBattleMon(bsys, ctx, &ai->defenderMon, defender);
@@ -44,11 +43,15 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
     ai->defenderTurnsOnField = ctx->total_turn - ctx->battlemon[ai->defender].moveeffect.fakeOutCount;
     ai->attackerTurnsOnField = ctx->total_turn - ctx->battlemon[attacker].moveeffect.fakeOutCount;
 
-    ai->defenderMovesFirst = 0;
-    ai->attackerMovesFirst = 0;
+    ai->playerMovesFirst = 0;
+    ai->aiMovesFirst = 0;
     ai->isSpeedTie = 0;
     ai->maxDamageReceived = 0;
     ai->attackerRolledMaxDamage = 0;
+
+    ai->partnerMoveNo = 0;
+    ai->partnerClicksAttackingMove = FALSE;
+    ai->ignoreTarget = FALSE;
 
     ai->defenderKnowsThawingMove = BattlerKnowsThawingMove(bsys, ai->defender, ai);
 
@@ -60,7 +63,25 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
     ai->defenderHasAtleastOneUsefulSoundMove = FALSE;
     ai->defenderCanForceSwitching = FALSE;
 
-    ai->postKoScoringPosition = BattleAI_PostKOSwitchIn_Internal(bsys, attacker, &ai->highestPostKoScoreFromParty, TRUE);
+    ai->defenderHasSturdyOrFocusSashActive = FALSE;
+    if (ai->defenderMon.hp == ai->defenderMon.maxhp) {
+        if (ai->defenderMon.item == ITEM_FOCUS_SASH || (ai->defenderMon.ability == ABILITY_STURDY && !ai->attackerMon.hasMoldBreaker)) {
+            ai->defenderHasSturdyOrFocusSashActive = TRUE;
+        }
+    }
+
+    ai->attackerHasSturdyOrFocusSashActive = FALSE;
+    if (ai->attackerMon.hp == ai->attackerMon.maxhp) {
+        if (ai->attackerMon.item == ITEM_FOCUS_SASH || (ai->attackerMon.ability == ABILITY_STURDY && !ai->defenderMon.hasMoldBreaker)) {
+            ai->attackerHasSturdyOrFocusSashActive = TRUE;
+        }
+    }
+
+    if (ai->highestPostKoScoreFromParty == 0) {
+        int score = 0;
+        ai->postKoScoringPosition = BattleAI_PostKOSwitchIn_Internal(bsys, attacker, &score, TRUE);
+        ai->highestPostKoScoreFromParty = score;
+    }
     debug_printf("PostKo: position %d with score %d\n", ai->postKoScoringPosition, ai->highestPostKoScoreFromParty);
 
     speedCalc = CalcSpeed(bsys, ctx, defender, attacker, CALCSPEED_FLAG_NO_PRIORITY); // checks actual turn order with field state considered
@@ -69,17 +90,17 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
     // if speed tie, then 2.
 
     if (speedCalc == 0) {
-        ai->defenderMovesFirst = 1;
+        ai->playerMovesFirst = 1;
     } else {
-        ai->attackerMovesFirst = 1;
-        if (speedCalc == 2) {
+        ai->aiMovesFirst = 1;
+        if (ctx->effectiveSpeed[attacker] == ctx->effectiveSpeed[defender]) {
             ai->isSpeedTie = 1;
         }
     }
     ai->attackerMon.speed = ctx->effectiveSpeed[attacker];
     ai->defenderMon.speed = ctx->effectiveSpeed[defender];
 
-    debug_printf("SpeedCalc %d, defMovesFirst %d, atkSpeed %d, defSpeed %d\n", speedCalc, ai->defenderMovesFirst, ai->attackerMon.speed, ai->defenderMon.speed);
+    debug_printf("SpeedCalc %d, defMovesFirst %d, atkSpeed %d, defSpeed %d\n", speedCalc, ai->playerMovesFirst, ai->attackerMon.speed, ai->defenderMon.speed);
 
     ai->isDefenderIncapacitated = FALSE;
     if ((ai->defenderMon.condition & STATUS_SLEEP)
@@ -89,8 +110,20 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
         ai->isDefenderIncapacitated = TRUE;
     }
 
+    ai->defenderAllyHasMagicBounce = FALSE;
+    if (ai->isDoubleBattle && ctx->battlemon[BATTLER_ALLY(defender)].hp 
+        && ctx->battlemon[BATTLER_ALLY(defender)].ability == ABILITY_MAGIC_BOUNCE && !ai->attackerMon.hasMoldBreaker) {
+        ai->defenderAllyHasMagicBounce = FALSE;
+    }
+
+    ai->defenderHasMagicBounce = FALSE;
+    if (ai->defenderMon.ability == ABILITY_MAGIC_BOUNCE && !ai->attackerMon.hasMoldBreaker) {
+        ai->defenderHasMagicBounce = TRUE;
+    }
+
     BOOL isDefenderImmuneToAnyStatus = FALSE;
     if ((ai->defenderMon.condition & STATUS_ALL)
+        || ai->defenderHasMagicBounce
         || (!ai->attackerMon.hasMoldBreaker
             && (ai->defenderMon.ability == ABILITY_GOOD_AS_GOLD
                 || ai->defenderMon.ability == ABILITY_PURIFYING_SALT
@@ -228,7 +261,7 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
         struct BattleMove attackerMove = ctx->moveTbl[attackerMoveno];
         if (attackerMove.split == SPLIT_STATUS && ctx->battlemon[attacker].pp[j]) {
             u8 movetype = GetAdjustedMoveTypeBasics(ctx, attackerMoveno, ai->attackerMon.ability, attackerMove.type);
-            ai->effectivenessOnPlayer[j] = BattleAI_GetTypeEffectiveness(bsys, ctx, attackerMoveno, movetype, &effectivenessFlag, &ai->attackerMon, &ai->defenderMon);
+            ai->effectivenessOnPlayer[j] = BattleAI_GetTypeEffectiveness(bsys, ctx, attackerMoveno, movetype, attacker, defender, &ai->attackerMon, &ai->defenderMon);
         } else if (attackerMove.power && ctx->battlemon[attacker].pp[j]) {
             ai->attackerHasAttackingMoves = TRUE;
             damages.damageRoll = BattleAI_CalcDamage(bsys, ctx, attackerMoveno, ctx->side_condition[BATTLER_IS_ENEMY(attacker)], ctx->field_condition, attackerMove.power, attackerMove.type, critical, attacker, defender, &damages, &ai->attackerMon, &ai->defenderMon);
@@ -252,6 +285,14 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
             if (ai->attackerRolledMoveDamages[j] > ai->attackerRolledMaxDamage) {
                 ai->attackerRolledMaxDamage = ai->attackerRolledMoveDamages[j];
             }
+
+            if (ai->effectivenessOnPlayer[j] >= TYPE_MUL_NORMAL)
+            {
+                ai->attackerHasValidDamagingMove = TRUE;
+            }
+        }
+        if (IsMoveValidSwitchingMove(attackerMoveno) && ai->effectivenessOnPlayer[j] > TYPE_MUL_NO_EFFECT) {
+            ai->attackerHasValidSwitchingMove = TRUE;
         }
     }
 }

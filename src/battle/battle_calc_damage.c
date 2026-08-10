@@ -679,34 +679,6 @@ void CalcDamageOverall(void *bw, struct BattleStruct *sp)
                     debug_printf("[CalcBaseDamage] 6.9.2 Neuroforce (client %d loop %d)\n", sp->rawSpeedNonRNGClientOrder[i], i);
                     debug_printf("[CalcBaseDamage] finalModifier: %d\n", finalModifier);
 #endif
-                    }
-                    break;
-                case TYPE_MUL_SUPER_EFFECTIVE:
-                case TYPE_MUL_DOUBLE_SUPER_EFFECTIVE:
-                case TYPE_MUL_TRIPLE_SUPER_EFFECTIVE:
-                    // 6.9.2 Neuroforce
-                    if ((sp->rawSpeedNonRNGClientOrder[i] == attacker)
-                    && (attackerAbility == ABILITY_NEUROFORCE)) {
-                        finalModifier = QMul_RoundUp(finalModifier, UQ412__1_25);
-#ifdef DEBUG_DAMAGE_CALC
-                        debug_printf("\n=================\n");
-                        debug_printf("[CalcBaseDamage] 6.9.2 Neuroforce (client %d loop %d)\n", sp->rawSpeedNonRNGClientOrder[i], i);
-                        debug_printf("[CalcBaseDamage] finalModifier: %d\n", finalModifier);
-#endif
-                    }
-                    // 6.9.8 Solid Rock / Filter / Prism Armor
-                    if ((sp->rawSpeedNonRNGClientOrder[i] == defender)
-                        && (MoldBreakerAbilityCheck(sp, attacker, defender, ABILITY_SOLID_ROCK) || MoldBreakerAbilityCheck(sp, attacker, defender, ABILITY_FILTER) || defenderAbility == ABILITY_PRISM_ARMOR)) {
-                        finalModifier = QMul_RoundUp(finalModifier, UQ412__0_75);
-#ifdef DEBUG_DAMAGE_CALC
-                        debug_printf("\n=================\n");
-                        debug_printf("[CalcBaseDamage] 6.9.8 Solid Rock / Filter / Prism Armor (client %d loop %d)\n", sp->rawSpeedNonRNGClientOrder[i], i);
-                        debug_printf("[CalcBaseDamage] finalModifier: %d\n", finalModifier);
-#endif
-                    }
-                    break;
-                default:
-                    break;
                 }
                 break;
             case TYPE_MUL_SUPER_EFFECTIVE:
@@ -932,8 +904,9 @@ void CalcDamageOverall(void *bw, struct BattleStruct *sp)
     // 0.25x damage into protect
     if (((attackerAbility == ABILITY_PIERCING_DRILL)
 #if UNSEEN_FIST_GENERATION >= GEN_CHAMPIONS
-            || (attackerAbility == ABILITY_UNSEEN_FIST))
+            || (attackerAbility == ABILITY_UNSEEN_FIST)
 #endif
+                )
         && sp->oneTurnFlag[defender].protectFlag) {
         damage = QMul_RoundDown(damage, UQ412__0_25);
 #ifdef DEBUG_DAMAGE_ROLLS

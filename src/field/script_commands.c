@@ -1,34 +1,23 @@
-#include "../../include/types.h"
-#include "../../include/bag.h"
-#include "../../include/battle.h"
-#include "../../include/config.h"
-#include "../../include/debug.h"
-#include "../../include/constants/file.h"
-#include "../../include/message.h"
-#include "../../include/pokemon.h"
-#include "../../include/rtc.h"
-#include "../../include/save.h"
-#include "../../include/script.h"
-#include "../../include/constants/ability.h"
-#include "../../include/constants/file.h"
-#include "../../include/constants/game.h"
-#include "../../include/constants/hold_item_effects.h"
-#include "../../include/constants/item.h"
-#include "../../include/constants/moves.h"
-#include "../../include/constants/species.h"
-#include "../../include/constants/weather_numbers.h"
-#include "../../include/constants/generated/learnsets.h"
-#include "../../include/map_events_internal.h"
-
-void shuffle(u8 array[], int n)
-{
-    for (int i = n - 1; i > 0; i--) {
-        int j = gf_rand() % (i + 1);
-        u8 temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
+#include "types.h"
+#include "bag.h"
+#include "battle.h"
+#include "config.h"
+#include "debug.h"
+#include "constants/file.h"
+#include "message.h"
+#include "pokemon.h"
+#include "rtc.h"
+#include "save.h"
+#include "script.h"
+#include "constants/ability.h"
+#include "constants/file.h"
+#include "constants/game.h"
+#include "constants/hold_item_effects.h"
+#include "constants/item.h"
+#include "constants/moves.h"
+#include "constants/species.h"
+#include "constants/weather_numbers.h"
+#include "constants/generated/learnsets.h"
 
 void SetupAndStartTotemBattle(TaskManager *taskManager, u16 species, u8 level, u32 *winFlag, BOOL shiny);
 

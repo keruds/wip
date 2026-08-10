@@ -3,6 +3,7 @@
 .data
 
 _000:
+	AbilityPopup BATTLER_CATEGORY_SIDE_EFFECT_MON
     PrintAttackMessage 
     Wait 
     WaitButtonABTime 15

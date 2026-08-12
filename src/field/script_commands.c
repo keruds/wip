@@ -1,23 +1,24 @@
-#include "types.h"
-#include "bag.h"
-#include "battle.h"
 #include "config.h"
 #include "debug.h"
-#include "constants/file.h"
-#include "message.h"
-#include "pokemon.h"
-#include "rtc.h"
-#include "save.h"
-#include "script.h"
+#include "types.h"
+
 #include "constants/ability.h"
 #include "constants/file.h"
 #include "constants/game.h"
+#include "constants/generated/learnsets.h"
 #include "constants/hold_item_effects.h"
 #include "constants/item.h"
 #include "constants/moves.h"
 #include "constants/species.h"
 #include "constants/weather_numbers.h"
-#include "constants/generated/learnsets.h"
+
+#include "bag.h"
+#include "battle.h"
+#include "message.h"
+#include "pokemon.h"
+#include "rtc.h"
+#include "save.h"
+#include "script.h"
 
 void SetupAndStartTotemBattle(TaskManager *taskManager, u16 species, u8 level, u32 *winFlag, BOOL shiny);
 
@@ -41,8 +42,7 @@ BOOL ScrCmd_GiveEgg(SCRIPTCONTEXT *ctx)
 
     struct Party *party = SaveData_GetPlayerPartyPtr(fsys->savedata);
     u8 partyCount = party->count;
-    if (partyCount < 6)
-    {
+    if (partyCount < 6) {
         struct PartyPokemon *pokemon = AllocMonZeroed(11);
         ZeroMonData(pokemon);
         int val = sub_02017FE4(1, offset);
@@ -74,10 +74,11 @@ BOOL ScrCmd_GiveEgg(SCRIPTCONTEXT *ctx)
  *  @param ctx script context structure
  *  @return FALSE
  */
-BOOL ScrCmd_GiveTogepiEgg(SCRIPTCONTEXT *ctx) {
-    //s32 i;
-    //u8 pp;
-    //u16 moveData;
+BOOL ScrCmd_GiveTogepiEgg(SCRIPTCONTEXT *ctx)
+{
+    s32 i;
+    u8 pp;
+    u16 moveData;
     struct PartyPokemon *togepi;
     void *profile;
     struct Party *party;
@@ -102,11 +103,17 @@ BOOL ScrCmd_GiveTogepiEgg(SCRIPTCONTEXT *ctx) {
     }
     SetEggStats(togepi, species, 1, profile, 3, sub_02017FE4(1, 13));
 
-    //SetMonData(togepi, MON_DATA_FORM, &form); // add form capability
+    // SetMonData(togepi, MON_DATA_FORM, &form); // add form capability
 
+<<<<<<< HEAD
     //ClearMonMoves(pokemon);
     //InitBoxMonMoveset(&pokemon->box);
     /*
+=======
+    // ClearMonMoves(pokemon);
+    // InitBoxMonMoveset(&pokemon->box);
+
+>>>>>>> main
     for (i = 0; i < 4; i++) {
         if (!GetMonData(togepi, MON_DATA_MOVE1 + i, 0)) {
             break;
@@ -141,7 +148,6 @@ BOOL ScrCmd_GiveTogepiEgg(SCRIPTCONTEXT *ctx) {
     }
 #endif
 
-
     PokeParty_Add(party, togepi);
 
     sys_FreeMemoryEz(togepi);
@@ -151,7 +157,8 @@ BOOL ScrCmd_GiveTogepiEgg(SCRIPTCONTEXT *ctx) {
     return FALSE;
 }
 
-BOOL ScrCmd_DaycareSanitizeMon(SCRIPTCONTEXT *ctx) {
+BOOL ScrCmd_DaycareSanitizeMon(SCRIPTCONTEXT *ctx)
+{
     struct PartyPokemon *partyMon;
 
     FieldSystem *fieldSystem = ctx->fsys;
@@ -182,15 +189,15 @@ BOOL ScrCmd_DaycareSanitizeMon(SCRIPTCONTEXT *ctx) {
     if (form > 0) {
         u32 species = GetMonData(partyMon, MON_DATA_SPECIES, NULL);
         switch (species) {
-            case SPECIES_GIRATINA:
-                PokeParaGiratinaFormChange(partyMon);
-                break;
-            case SPECIES_ROTOM:
-                Mon_UpdateRotomForm(partyMon, 0, 0);
-                break;
-            case SPECIES_SHAYMIN:
-                Mon_UpdateShayminForm(partyMon, 0);
-                break;
+        case SPECIES_GIRATINA:
+            PokeParaGiratinaFormChange(partyMon);
+            break;
+        case SPECIES_ROTOM:
+            Mon_UpdateRotomForm(partyMon, 0, 0);
+            break;
+        case SPECIES_SHAYMIN:
+            Mon_UpdateShayminForm(partyMon, 0);
+            break;
         }
     }
 
@@ -336,24 +343,117 @@ BOOL ScrCmd_DaycareSanitizeMon(SCRIPTCONTEXT *ctx) {
     return FALSE;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+BOOL ScrCmd_BufferItemName(SCRIPTCONTEXT *ctx) {
+    MessageFormat **msgFmt = FieldSysGetAttrAddr(ctx->fsys, 16);
+    u8 idx = ScriptReadByte(ctx);
+    u16 itemId = ScriptGetVar(ctx);
+    BufferItemNameGiveItem(*msgFmt, idx, itemId);
+    return FALSE;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *  @brief clear overworld request flags
+ *
+ *  @param req OVERWORLD_REQUEST_FLAGS structure to clear
+ */
+void LONG_CALL ClearOverworldRequestFlags(OVERWORLD_REQUEST_FLAGS *req)
+{
+    req->TalkCheck = 0;
+    req->StepCheck = 0;
+    req->MenuOpen = 0;
+    req->unk0_0018 = 0;
+    req->CnvButton = 0;
+    req->MatCheck = 0;
+    req->PushCheck = 0;
+    req->MoveCheck = 0;
+    req->FloatCheck = 0;
+    req->DebugMenu = 0;
+    req->DebugBattle = 0;
+    req->DebugHook = 0;
+    req->DebugKeyPush = 0;
+
+    req->OpenPCCheck = 0; // new:  check if pc should be opened
+    req->ToggleRepel = 0;
+
+    req->Site = 0xFF;
+    req->PushSite = 0xFF;
+}
+
+/**
+ *  @brief set new overworld request flags depending on buttons pressed
+ *
+ *  @param req OVERWORLD_REQUEST_FLAGS structure to set flags in
+ *  @param trg buttons that are pressed on this frame
+ */
+void LONG_CALL SetOverworldRequestFlags(OVERWORLD_REQUEST_FLAGS *req, u16 trg)
+{
+    if (trg & PAD_BUTTON_L) {
+        req->ToggleRepel = TRUE;
+    }
+    if (trg & PAD_BUTTON_R) {
+        //    req->OpenPCCheck = TRUE;
+    }
+}
+
+/**
+ *  @brief handle overworld request flags
+ *
+ *  @param req OVERWORLD_REQUEST_FLAGS structure to set flags in
+ */
+void LONG_CALL CheckOverworldRequestFlags(OVERWORLD_REQUEST_FLAGS *req, FieldSystem *fsys)
+{
+    if (req->ToggleRepel) {
+        EventSet_Script(fsys, 2094, NULL);
+    }
+
+    /* if (req->OpenPCCheck) {
+         SetScriptFlag(0x18F); // some random flag that should be set by script 2010 (file 3 script 10)
+         EventSet_Script(fsys, 2010, NULL); // set up script 2010
+     }*/
+=======
+>>>>>>> main
 BOOL ScrCmd_WildBattle(SCRIPTCONTEXT *ctx) {
+=======
+BOOL ScrCmd_WildBattle(SCRIPTCONTEXT *ctx)
+{
+>>>>>>> ed959d3e9eafc6b61d6176076135ab1052ca5fa5
     u32 *winFlag = FieldSysGetAttrAddr(ctx->fsys, 24); // SCRIPTENV_BATTLE_WIN_FLAG = 24
     u16 species = ScriptGetVar(ctx);
     u16 level = ScriptGetVar(ctx);
     u8 shiny = ScriptReadByte(ctx);
     // Set this var to 1 in DSPRE just prior to starting a forced wild battle to turn it into a Totem battle.
-    if (GetScriptVar(0x800B))
-    {
+    if (GetScriptVar(0x800B)) {
         SetupAndStartTotemBattle(ctx->taskman, species, level, winFlag, shiny);
-    }
-    else
-    {
+    } else {
         SetupAndStartWildBattle(ctx->taskman, species, level, winFlag, TRUE, shiny);
     }
     return TRUE;
 }
 
-void SetupAndStartTotemBattle(TaskManager *taskManager, u16 species, u8 level, u32 *winFlag, BOOL shiny) {
+void SetupAndStartTotemBattle(TaskManager *taskManager, u16 species, u8 level, u32 *winFlag, BOOL shiny)
+{
     FieldSystem *fieldSystem = taskManager->fieldSystem;
     struct BattleSetup *setup = BattleSetup_New(HEAPID_WORLD, BATTLE_TYPE_TOTEM);
     BattleSetup_InitFromFieldSystem(setup, fieldSystem);
@@ -362,8 +462,7 @@ void SetupAndStartTotemBattle(TaskManager *taskManager, u16 species, u8 level, u
     // Uncomment this line if you want to manually adjust specific elements according to Totem Species.
     // struct PartyPokemon *totem = Party_GetMonByIndex(setup->party[BATTLER_ENEMY], 0);
 
-    switch (species)
-    {
+    switch (species) {
         // You can use the case below as a template:
         /*case SPECIES_GYARADOS:
             // Ability:
@@ -424,7 +523,8 @@ void SetupAndStartTotemBattle(TaskManager *taskManager, u16 species, u8 level, u
             SetMonData(totem, MON_DATA_PERSONALITY, &pid_1);
             break;*/
 
-        default: break;
+    default:
+        break;
     }
 
     GameStats_Inc(Save_GameStats_Get(fieldSystem->savedata), GAME_STAT_WILD_ENCOUNTERS);

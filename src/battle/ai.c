@@ -1,7 +1,7 @@
 #include "config.h"
 #include "debug.h"
 #include "types.h"
-
+#include "overlay.h"
 #include "constants/ability.h"
 #include "constants/battle_script_constants.h"
 #include "constants/file.h"

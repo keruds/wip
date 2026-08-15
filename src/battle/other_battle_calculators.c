@@ -2858,7 +2858,7 @@ BOOL LONG_CALL BattleSystem_CheckMoveEffect(void *bw, struct BattleStruct *sp, i
     // thunder wave when used by a electric type
     if (move == MOVE_THUNDER_WAVE
         && HasType(sp, battlerIdAttacker, TYPE_ELECTRIC)) {
-        sp->waza_status_flag &= ~MOVE_STATUS_FLAG_MISS;
+        sp->waza_status_flag &= ~MOVE_STATUS_MISSED;
         return TRUE;
     }
 

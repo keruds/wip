@@ -15,6 +15,7 @@
 #include "task.h"
 #include "types.h"
 #include "trainer_ai.h"
+
 #define CLIENT_MAX 4
 
 // Contest types
@@ -777,7 +778,8 @@ typedef struct MoveConditionsFlags {
     u8 throatChopTimer : 2;
 
     u8 dragonDartsStatus : 3;
-    u8 padding : 5;
+    u8 anyStatLoweredThisMoveExecution : 1;
+    u8 padding : 4;
 } MoveConditionsFlags;
 
 typedef struct MovePerformanceContext {
@@ -819,8 +821,6 @@ typedef struct MagicBounceContext {
     u8 bounceMaxCounter;
 } MagicBounceContext;
 
-<<<<<<< HEAD
-
 
 enum AI_calcState {
     Initial = 0,
@@ -834,8 +834,6 @@ typedef struct AI_turnScoring {
 } AI_turnScoring;
 
 
-=======
->>>>>>> main
 #define BATTLE_SCRIPT_PUSH_DEPTH 4
 
 /**
@@ -1075,6 +1073,7 @@ struct BattleStruct {
     u8 gemBoostingMovePadding : 4;
 
     int currentMoveSwitchStatus;
+    u8 ejectPackActivated;
 
     MoveConditionsFlags moveConditionsFlags[CLIENT_MAX];
     u8 paradoxBoostedStat[CLIENT_MAX];
@@ -3712,7 +3711,6 @@ void LONG_CALL BattleController_EmitPlayFaintAnimation(struct BattleSystem *bsys
 
 void LONG_CALL InitFaintedWork(struct BattleSystem *bsys, struct BattleStruct *ctx, int battlerId);
 
-int GetSanitisedType(int type);
 /**
  * @brief checks if the current move hits any oppsoing battler or ally
  * @param sp global battle structure

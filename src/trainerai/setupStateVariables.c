@@ -23,7 +23,7 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
     FillDamageStructFromBattleMon(bsys, ctx, &ai->attackerMon, attacker);
     FillDamageStructFromBattleMon(bsys, ctx, &ai->defenderMon, defender);
     ai->isDoubleBattle = FALSE;
-    if (BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TAG)) {
+    if (BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLES | BATTLE_TYPE_TAG)) {
         ai->isDoubleBattle = TRUE;
     }
     ai->isAllyAlive = FALSE;
@@ -79,10 +79,14 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
 
     if (ai->highestPostKoScoreFromParty == 0) {
         int score = 0;
-        ai->postKoScoringPosition = BattleAI_PostKOSwitchIn_Internal(bsys, attacker, &score, TRUE);
+        int highestDamageHitPrct = 0;
+        ai->postKoScoringPosition = BattleAI_PostKOSwitchIn_Internal(bsys, attacker, &score, TRUE, &highestDamageHitPrct);
         ai->highestPostKoScoreFromParty = score;
+        ai->highestDamageHitPrct = highestDamageHitPrct;
     }
-    debug_printf("PostKo: position %d with score %d\n", ai->postKoScoringPosition, ai->highestPostKoScoreFromParty);
+#ifdef DEBUG_AI_SCORING
+    debug_printf("PostKo: position %d with score %d and highest damage hit percent %d\n", ai->postKoScoringPosition, ai->highestPostKoScoreFromParty, ai->highestDamageHitPrct);
+#endif // DEBUG_AI_SCORING
 
     speedCalc = CalcSpeed(bsys, ctx, defender, attacker, CALCSPEED_FLAG_NO_PRIORITY); // checks actual turn order with field state considered
     // evaluates to 0 if ai->defender > attacker (false)
@@ -99,9 +103,9 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
     }
     ai->attackerMon.speed = ctx->effectiveSpeed[attacker];
     ai->defenderMon.speed = ctx->effectiveSpeed[defender];
-
+#ifdef DEBUG_AI_SCORING
     debug_printf("SpeedCalc %d, defMovesFirst %d, atkSpeed %d, defSpeed %d\n", speedCalc, ai->playerMovesFirst, ai->attackerMon.speed, ai->defenderMon.speed);
-
+#endif
     ai->isDefenderIncapacitated = FALSE;
     if ((ai->defenderMon.condition & STATUS_SLEEP)
         || ((ai->defenderMon.condition & STATUS_FREEZE) && !ai->defenderKnowsThawingMove)
@@ -128,8 +132,8 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
             && (ai->defenderMon.ability == ABILITY_GOOD_AS_GOLD
                 || ai->defenderMon.ability == ABILITY_PURIFYING_SALT
                 || (ai->defenderMon.ability == ABILITY_SHIELDS_DOWN && ai->defenderMon.percenthp > 50)
-                || (ai->defenderMon.ability == ABILITY_LEAF_GUARD && ctx->field_condition & WEATHER_SUNNY_ANY)))
-        || (ai->defenderMon.ability == ABILITY_HYDRATION && ctx->field_condition & WEATHER_RAIN_ANY)
+                || (ai->defenderMon.ability == ABILITY_LEAF_GUARD && ctx->field_condition & FIELD_CONDITION_SUN_ALL)))
+        || (ai->defenderMon.ability == ABILITY_HYDRATION && ctx->field_condition & FIELD_CONDITION_RAIN_ALL)
         || (ai->defenderMon.ability == ABILITY_COMATOSE)
         || (ctx->side_condition[ai->defenderSide] & SIDE_STATUS_SAFEGUARD)) {
         isDefenderImmuneToAnyStatus = TRUE;
@@ -200,9 +204,7 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
 
     ai->attackerMovesKnown = GetBattlerLearnedMoveCount(bsys, ctx, attacker);
 
-#ifdef BATTLE_DEBUG_OUTPUT
     int highestDamageMoveIndex = 0;
-#endif
     ai->playerCanOneShotMonWithAnyMove = FALSE;
     for (int k = 0; k < GetBattlerLearnedMoveCount(bsys, ctx, ai->defender); k++) {
         struct AI_damage damages = { 0 };
@@ -225,9 +227,7 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
 
             if (damages.damageRoll > ai->maxDamageReceived) {
                 ai->maxDamageReceived = damages.damageRoll;
-#ifdef BATTLE_DEBUG_OUTPUT
                 highestDamageMoveIndex = k;
-#endif
             }
             if (damages.moveEffectiveness >= TYPE_MUL_NORMAL) {
                 if (defenderMove.split == SPLIT_SPECIAL) {
@@ -243,15 +243,17 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
                 ai->defenderCanForceSwitching = TRUE;
             }
 
+#ifdef DEBUG_AI_SCORING
             debug_printf("Receiving from move %d: %3d is [%4d-%4d], roll %4d > att.HP %d\n", k, defenderMoveno, damages.damageRange[0], damages.damageRange[15], damages.damageRoll, ai->attackerMon.hp);
+#endif  
         } else {
             ai->defenderHasAtleastOneStatusMove = TRUE;
         }
     }
 
-#ifdef BATTLE_DEBUG_OUTPUT
+#ifdef DEBUG_AI_SCORING
     debug_printf("Overall Max damage received from %i:%i is %d > %d att.HP\n", highestDamageMoveIndex, ctx->battlemon[ai->defender].move[highestDamageMoveIndex], ai->maxDamageReceived, ai->attackerMon.hp);
-#endif // BATTLE_DEBUG_OUTPUT
+#endif // DEBUG_AI_SCORING
 
     ai->attackerHasAttackingMoves = FALSE;
     ai->monCanOneShotPlayerWithAnyMove = FALSE;
@@ -280,8 +282,9 @@ void LONG_CALL SetupStateVariables(struct BattleSystem *bsys, u32 attacker, u32 
                 ai->monCanOneShotPlayerWithMove[j] = TRUE;
                 ai->attackerRolledMoveDamages[j] = ai->defenderMon.hp; // cap killing move's damage at defender HP, so that all killing moves are treated equally as "highest damage"
             }
+#ifdef DEBUG_AI_SCORING
             debug_printf("Dealing with move %d: %3d is [%4d-%4d], roll %4d > def.HP %d\n", j, attackerMoveno, damages.damageRange[0], damages.damageRange[15], damages.damageRoll, ai->defenderMon.hp);
-
+#endif
             if (ai->attackerRolledMoveDamages[j] > ai->attackerRolledMaxDamage) {
                 ai->attackerRolledMaxDamage = ai->attackerRolledMoveDamages[j];
             }

@@ -101,7 +101,7 @@ s16 getNormalScore(int speedCalc, u8 aiMonCanOneshotPlayer, u8 playerCanOneShotA
     return score;
 }
 
-int LONG_CALL BattleAI_PostKOSwitchIn_Internal(struct BattleSystem *bsys, int attacker, int *score, BOOL calcWithHighestDamageHit)
+int LONG_CALL BattleAI_PostKOSwitchIn_Internal(struct BattleSystem *bsys, int attacker, int *score, BOOL calcWithHighestDamageHit, int *highestDamageHitPrct)
 {
     debug_printf("BattleAI_PostKOSwitchIn_Internal %d\n", attacker);
 
@@ -138,7 +138,7 @@ int LONG_CALL BattleAI_PostKOSwitchIn_Internal(struct BattleSystem *bsys, int at
 
     debug_printf("Targeting defender in slot %d(%d) with hp %d\n", defender, ctx->battlemon[defender].species, ctx->battlemon[defender].hp);
 
-    if (battleType & (BATTLE_TYPE_TAG | BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE)) {
+    if (battleType & (BATTLE_TYPE_TAG | BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLES)) {
         calcAcross = TRUE;
         if (!DoesSideHave2Battlers(bsys, slot1)) { // 2vs2 or 1vs2
             slot2 = BATTLER_ALLY(attacker);

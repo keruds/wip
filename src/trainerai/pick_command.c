@@ -10,7 +10,6 @@
 #include "../../include/constants/battle_message_constants.h"
 #include "../../include/custom/custom_ai.h"
 
-#define BATTLE_DEBUG_OUTPUT 1
 
 u8 LONG_CALL FindTargets(struct BattleStruct *ctx, u8 attacker, int targets[4], int moveScores[4][4], int damages[4][4], int highestScoredMove);
 u8 LONG_CALL ChooseMove(struct BattleSystem *bsys, int target, int moveScores[4][4], int highestScoredMove);
@@ -19,16 +18,24 @@ void LONG_CALL CalcTurnStateDamagesAndScores(struct BattleSystem *bsys, u32 atta
 
 int TrainerAI_PickCommand(struct BattleSystem *bsys, int attacker)
 {
+#ifdef DEBUG_AI_SCORING
     debug_printf("TrainerAI_PickCommand: %d\n", attacker);
+#endif // DEBUG_AI_SCORING
     struct BattleStruct *ctx = bsys->sp;
+    BOOL isTagPartner = FALSE;
+    if (attacker == 2) {
+        isTagPartner = TRUE;
+    }
+
     if (BattleTypeGet(bsys) == BATTLE_TYPE_SAFARI || BattleTypeGet(bsys) == BATTLE_TYPE_ROAMER) {
         return PLAYER_INPUT_FIGHT;
     }
     if ((BattleTypeGet(bsys) & BATTLE_TYPE_TRAINER) == 0) {
         return PLAYER_INPUT_FIGHT;
     }
-    if (ctx->aiTurnScoring.calcState == CalcedEnemy_1_and_3 && (attacker == 1 || attacker == 3))
+    if (ctx->aiTurnScoring.calcState == CalcedEnemy_1_and_3 && !isTagPartner) {
         return PLAYER_INPUT_FIGHT;
+    }
 
     int targets[4] = { 0 };
     int targetsAlly[4] = { 0 };
@@ -41,8 +48,8 @@ int TrainerAI_PickCommand(struct BattleSystem *bsys, int attacker)
     u8 defender = BATTLER_OPPONENT(attacker);
 
 
-#ifdef BATTLE_DEBUG_OUTPUT
-    if (BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TAG)) {
+#ifdef DEBUG_AI_SCORING
+    if (BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLES | BATTLE_TYPE_TAG)) {
 
         debug_printf("att %d(%d), ally %d(%d), defendOp %d(%d), defendCross %d(%d)\n",
             attacker, ctx->battlemon[attacker].species,
@@ -54,12 +61,13 @@ int TrainerAI_PickCommand(struct BattleSystem *bsys, int attacker)
     {
         debug_printf("att %d(%d), defendOp %d(%d)\n", attacker, ctx->battlemon[attacker].species, defender, ctx->battlemon[defender].species);
     }
-#endif // BATTLE_DEBUG_OUTPUT
+#endif // DEBUG_AI_SCORING
 
     BOOL canDivert = FALSE;
-    if ((BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TAG))
+    if ((BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLES | BATTLE_TYPE_TAG))
         && ctx->battlemon[attacker].hp
-        && ctx->battlemon[ally].hp)
+        && ctx->battlemon[ally].hp
+        && !isTagPartner)
     {
         canDivert = TRUE;
         int speedCalc = CalcSpeed(bsys, ctx, attacker, ally, CALCSPEED_FLAG_NO_PRIORITY);
@@ -68,7 +76,9 @@ int TrainerAI_PickCommand(struct BattleSystem *bsys, int attacker)
             ally = attacker;
             attacker = swap;
             defender = BATTLER_OPPONENT(attacker);
+#ifdef DEBUG_AI_SCORING
             debug_printf("swapping attacker(%d) and ally(%d): %d < %d\n", attacker, ally, ctx->effectiveSpeed[ally], ctx->effectiveSpeed[attacker]);
+#endif // DEBUG_AI_SCORING
         }
     }
 
@@ -93,10 +103,14 @@ int TrainerAI_PickCommand(struct BattleSystem *bsys, int attacker)
         aiAlly1->partnerClicksAttackingMove = TRUE;
         aiAlly2->partnerClicksAttackingMove = TRUE;
         if (ai1->monCanOneShotPlayerWithAnyMove && ai1->aiMovesFirst) {
+#ifdef DEBUG_AI_SCORING
             debug_printf("attacker(%d) goes for fast kill on defender %d. Partner ignores target.\n", attacker, ai1->defender);
+#endif // DEBUG_AI_SCORING
             aiAlly2->ignoreTarget = TRUE;
         } else if (ai2->monCanOneShotPlayerWithAnyMove && ai2->aiMovesFirst) {
+#ifdef DEBUG_AI_SCORING
             debug_printf("attacker(%d) goes for fast kill on defender %d. Partner ignores target.\n", attacker, ai2->defender);
+#endif // DEBUG_AI_SCORING
             aiAlly1->ignoreTarget = TRUE;
         }
     }
@@ -143,14 +157,16 @@ u8 LONG_CALL FindTargets(struct BattleStruct *ctx, u8 attacker, int targets[4], 
         for (u8 i = 0; i < 4; i++) // movesScore
         {
             if (moveScores[k][i] == highestScoredMove) {
+#ifdef DEBUG_AI_SCORING
                 debug_printf("found target %d with score %d, dmg %d\n", k, highestScoredMove, damages[k][i]);
+#endif // DEBUG_AI_SCORING
                 targets[targetsSize] = k;
                 targetsSize++;
                 break;
             }
         }
     }
-#ifdef BATTLE_DEBUG_OUTPUT
+#ifdef DEBUG_AI_SCORING
     debug_printf("attacker %d (%d):\n", attacker, ctx->battlemon[attacker].species);
     u8 j = 0;
     for (int k = 0; k < 4; k++) {
@@ -165,7 +181,7 @@ u8 LONG_CALL FindTargets(struct BattleStruct *ctx, u8 attacker, int targets[4], 
         }
         debug_printf("\n");
     }
-#endif // BATTLE_DEBUG_OUTPUT
+#endif // DEBUG_AI_SCORING
 
     return targetsSize;
 }
@@ -182,10 +198,22 @@ u8 LONG_CALL ChooseMove(struct BattleSystem *bsys, int target, int moveScores[4]
     }
     u8 tieMoveIndex = (BattleRand(bsys) % tieMoveCount);
     u8 result = tiedMoveIndices[tieMoveIndex]; // % 4]; // randomly pick a move among the tie
-#ifdef BATTLE_DEBUG_OUTPUT
-    debug_printf("got tieMoveIndex %d -> Resulting move: %d\n", tieMoveIndex, result);
-#endif // BATTLE_DEBUG_OUTPUT
+#ifdef DEBUG_AI_SCORING
+    debug_printf("got tieMoveIndex/Count %d/%d -> Resulting move: %d\n", tieMoveIndex, tieMoveCount, result);
+#endif // DEBUG_AI_SCORING
     return result;
+}
+
+int getVarianceFromDamage(struct AIContext *ai)
+{
+    if (ai->highestDamageHitPrct <= 0) {
+        return 30;
+    }
+    if (ai->highestDamageHitPrct >= 50) {
+        return 0;
+    }
+
+    return (50 - ai->highestDamageHitPrct) * 3 / 5;
 }
 
 BOOL LONG_CALL CalculateSwitch(struct BattleSystem *bsys, u32 attacker, u32 defender, struct AIContext *ai)
@@ -211,11 +239,11 @@ BOOL LONG_CALL CalculateSwitch(struct BattleSystem *bsys, u32 attacker, u32 defe
         return FALSE;
     }
     BOOL hasPerishSong = FALSE;
-    if (ctx->battlemon[attacker].effect_of_moves & MOVE_EFFECT_FLAG_PERISH_SONG_ACTIVE) {
+    if (ctx->battlemon[attacker].effect_of_moves & MOVE_EFFECT_FLAG_PERISH_SONG) {
         hasPerishSong = TRUE;
     }
     int doublesAddon = 0;
-    if ((BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TAG)) 
+    if ((BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLES | BATTLE_TYPE_TAG)) 
         && ctx->battlemon[defender].hp 
         && ctx->battlemon[BATTLER_ALLY(defender)].hp) {
         doublesAddon = 3;
@@ -228,14 +256,17 @@ BOOL LONG_CALL CalculateSwitch(struct BattleSystem *bsys, u32 attacker, u32 defe
         }
     } else {
         if (ai->highestPostKoScoreFromParty == (104 + doublesAddon)) {
-            switchScore = 25;
+            switchScore = getVarianceFromDamage(ai);
         }
         if (ai->highestPostKoScoreFromParty >= (104 + doublesAddon + 1)) {
-            switchScore = 50;
+            switchScore = 25 + getVarianceFromDamage(ai);
         }
     }
 
     int rand = BattleRand(bsys) % 100;
+#ifdef DEBUG_AI_SCORING
+    debug_printf("rand %d, switchScore %d\n", rand, switchScore);
+#endif // DEBUG_AI_SCORING
     if (rand <= switchScore) {
         return TRUE;
     }
@@ -257,10 +288,12 @@ void LONG_CALL CalcTurnStateDamagesAndScores(struct BattleSystem *bsys, u32 atta
         aiOp2->highestPostKoScoreFromParty = aiOp1->highestPostKoScoreFromParty;
         aiOp2->postKoScoringPosition = aiOp1->postKoScoringPosition;
     } else {
+#ifdef DEBUG_AI_SCORING
         debug_printf("attacker(%d) ignores target %d.\n", attacker, defender);
+#endif // DEBUG_AI_SCORING
     }
 
-    if (BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TAG)) {
+    if (BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLES | BATTLE_TYPE_TAG)) {
         if (ctx->battlemon[defenderAcross].hp > 0 && !aiOp2->ignoreTarget) {
             SetupStateVariables(bsys, attacker, defenderAcross, aiOp2);
             for (u8 i = 0; i < 4; i++) {
@@ -269,7 +302,9 @@ void LONG_CALL CalcTurnStateDamagesAndScores(struct BattleSystem *bsys, u32 atta
             aiOp2->shouldSwitch = CalculateSwitch(bsys, attacker, defenderAcross, aiOp2);
         }
     } else {
+#ifdef DEBUG_AI_SCORING
         debug_printf("attacker(%d) ignores target %d.\n", attacker, defenderAcross);
+#endif // DEBUG_AI_SCORING
     }
 
 
@@ -284,7 +319,7 @@ void LONG_CALL CalcTurnStateDamagesAndScores(struct BattleSystem *bsys, u32 atta
         turnState->highestScoredMove = ScoreMovesAgainstDefender(bsys, attacker, defender, turnState->moveScores, aiOp1);
     }
 
-    if (BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TAG)) {
+    if (BattleTypeGet(bsys) & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLES | BATTLE_TYPE_TAG)) {
         int highestScoredMoveAcross = 0;
         if (ctx->battlemon[defenderAcross].hp > 0 && !aiOp2->ignoreTarget) {
             highestScoredMoveAcross = ScoreMovesAgainstDefender(bsys, attacker, defenderAcross, turnState->moveScores, aiOp2);

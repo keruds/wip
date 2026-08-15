@@ -1,15 +1,11 @@
-<<<<<<< HEAD
 #include "../include/battle.h"
 #include "../include/constants/ability.h"
-=======
-#include "../include/config.h"
->>>>>>> main
 #include "../include/constants/file.h"
 #include "../include/pokemon.h"
 #include "../include/repel.h"
 #include "../include/script.h"
 #include "../include/types.h"
-
+#include "../include/config.h"
 #define SCRIPT_NEW_CMD_REPEL_USE    0
 #define SCRIPT_NEW_CMD_STATUS_REPEL 1
 #define SCRIPT_NEW_CMD_TOGGLE_REPEL 2
@@ -63,8 +59,7 @@ BOOL Script_RunNewCmd(SCRIPTCONTEXT *ctx)
 
     return FALSE;
 }
-
-<<<<<<< HEAD
+#ifdef EXPAND_ROAMERS
 #define SET_HP_IV_MAX    0
 #define SET_ATK_IV_MAX   1
 #define SET_DEF_IV_MAX   2
@@ -167,9 +162,6 @@ BOOL Script_RunNewUtility(SCRIPTCONTEXT *ctx)
     return TRUE;
 }
 
-=======
-#ifdef EXPAND_ROAMERS
->>>>>>> main
 BOOL LONG_CALL ScrCmd_CreateRoamer(SCRIPTCONTEXT *ctx)
 {
     u8 roamerNo = ScriptReadByte(ctx);

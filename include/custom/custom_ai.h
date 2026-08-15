@@ -3,7 +3,7 @@
 #include "../battle.h"
 #include "../trainer_ai.h"
 
-//#define BATTLE_DEBUG_OUTPUT 1
+#define DEBUG_AI_SCORING 1
 
 
 
@@ -69,7 +69,8 @@ struct PACKED AIContext {
 
     int highestPostKoScoreFromParty;
     int postKoScoringPosition;
-
+    int highestDamageHitPrct;
+    
     BOOL isAllyAlive;
     BOOL isDoubleBattle;
     BOOL isPartnerGrounded;
@@ -158,7 +159,7 @@ int LONG_CALL ScoreMovesAgainstAlly(struct BattleSystem *bsys, u32 attacker, u32
 
 
 int LONG_CALL BattleAI_PostKOSwitchIn(struct BattleSystem *bsys, int attacker);
-int LONG_CALL BattleAI_PostKOSwitchIn_Internal(struct BattleSystem *bsys, int attacker, int *score, BOOL calcWithHighestDamageHit);
+int LONG_CALL BattleAI_PostKOSwitchIn_Internal(struct BattleSystem *bsys, int attacker, int *score, BOOL calcWithHighestDamageHit, int *highestDamageHitPrct);
 
 u8 LONG_CALL BattleAI_CalcSpeed(void *bw, struct BattleStruct *sp, int client1, struct PartyPokemon *partyMon, int flag);
 

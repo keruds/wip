@@ -9,6 +9,7 @@
 
 #include "item.h"
 #include "pokemon.h"
+#include "pokepic.h"
 #include "save.h"
 #include "sprite.h"
 #include "task.h"
@@ -1235,11 +1236,13 @@ struct BattleSystem {
 
 struct ABILITY_POPUP_WORK {
     struct BattleSystem *bsys;
+    CATS_ACT_PTR icon;
     u16 ability;
     u8 battler;
     u8 side;
     u8 frames;
     u8 step;
+    u8 iconResourcesLoaded;
 };
 
 // Ability Checks - values for flag for CheckSideAbility
@@ -3760,5 +3763,10 @@ BOOL LONG_CALL ShouldPreventMonCapture(struct BattleSystem *bsys);
 
 u32 LONG_CALL RollMetronomeMove(struct BattleSystem *bsys);
 BOOL LONG_CALL CheckLegalMetronomeMove(struct BattleSystem *bsys UNUSED, struct BattleStruct *ctx UNUSED, int battlerId UNUSED, u16 moveNo);
+
+PokepicManager LONG_CALL *BattleSystem_GetPokepicManager(struct BattleSystem *battleSystem);
+BOOL LONG_CALL sub_02017068(void *animManager, int battlerId);
+void LONG_CALL *ov12_0223B750(struct BattleSystem *battleSystem);
+void LONG_CALL ov12_022600F0(SysTask *task, void *data); // Task_PlayFaintingSequence
 
 #endif // BATTLE_H

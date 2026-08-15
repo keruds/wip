@@ -181,6 +181,10 @@ void LONG_CALL AddWindowParameterized(void *bgConfig, void *window, u8 bgId, u8 
 void LONG_CALL Sprite_SetDrawFlag(void *sprite, BOOL draw);
 void *LONG_CALL GfGfxLoader_GetCharData(u32 narcId, s32 memberNo, BOOL isCompressed, void **ppCharData, u32 heapId);
 BOOL LONG_CALL SpriteSystem_LoadCharResObjAtEndWithHardwareMappingType(void *spriteSystem, void *spriteManager, int narcId, int fileId, BOOL compressed, int vram, int resId);
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 // SPA functions - names are speculative
 void LONG_CALL LoadOpenSPAToEmitter(/*SPLEmitter*/ void *emitter, void *data, u32 flag, BOOL loadNow);
 void *LONG_CALL OpenSPAFileInHeap(u32 narcId, int fileId, u32 heapId);

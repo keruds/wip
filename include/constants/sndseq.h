@@ -1373,7 +1373,9 @@
 #define SEQ_SE_GS_GEARSEALHAMERU      2376
 #define SEQ_SE_GS_XBUTTON_SYUKUSHOU   2377
 #define SEQ_SE_END                    2378
-
+#define SEQ_KANTO_CHAMPION            2379
+#define SEQ_TEST                      2380
+#define SEQ_E_TEST                    2381
 // Sounds marked BANK, WAVE, PLAYER, GROUP not ported over from pokeheartgold/include/constants/sndseq.h
 
 enum {
@@ -1423,6 +1425,8 @@ enum {
     ANIM_MUSIC_COMBO_KIMONO_GIRL,
     ANIM_MUSIC_COMBO_RED,
     ANIM_MUSIC_COMBO_EUSINE,
+    ANIM_MUSIC_COMBO_TEST,
+    ANIM_MUSIC_COMBO_KANTO_CHAMPION,
 };
 
 #endif // POKEHEARTGOLD_CONSTANTS_SNDSEQ_H

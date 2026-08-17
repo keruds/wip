@@ -21907,7 +21907,7 @@ const SpeciesDataEntry sSpeciesData[MAX_SPECIES_INCLUDING_FORMS + 1] = {
                 .speed = 95,
             },
             .types = { TYPE_DRAGON, TYPE_FLYING },
-            .catchRate = 45,
+            .catchRate = 3,
             .baseExpRewardPadding = 0,
             .evYields = {
                 .hp = 0,

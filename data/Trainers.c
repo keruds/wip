@@ -545,10 +545,10 @@ const TrainerData sTrainerData[] = {
     },
 
     [11] = {
-        .name = "Memory5ty7",
+        .name = "Roark",
         .data = {
             .trainerType = TRAINER_DATA_TYPE_MOVES | TRAINER_DATA_TYPE_ITEMS | TRAINER_DATA_TYPE_ABILITY | TRAINER_DATA_TYPE_IV_EV_SET | TRAINER_DATA_TYPE_NATURE_SET | TRAINER_DATA_TYPE_SHINY_LOCK,
-            .trainerClass = TRAINERCLASS_ACE_TRAINER_M,
+            .trainerClass = TRAINERCLASS_LEADER_ROARK,
             .items = { ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE },
             .aiFlags = F_PRIORITIZE_SUPER_EFFECTIVE | F_EVALUATE_ATTACKS | F_EXPERT_ATTACKS,
             .battleType = DOUBLE_BATTLE,
@@ -15601,7 +15601,7 @@ const TrainerData sTrainerData[] = {
     [279] = {
         .name = "Joey",
         .data = {
-            .trainerType = TRAINER_DATA_TYPE_MOVES | TRAINER_DATA_TYPE_ITEMS | TRAINER_DATA_TYPE_ABILITY | TRAINER_DATA_TYPE_IV_EV_SET | TRAINER_DATA_TYPE_NATURE_SET,
+            .trainerType = TRAINER_DATA_TYPE_ABILITY | TRAINER_DATA_TYPE_IV_EV_SET | TRAINER_DATA_TYPE_NATURE_SET,
             .trainerClass = TRAINERCLASS_YOUNGSTER,
             .items = { ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE },
             .aiFlags = F_PRIORITIZE_SUPER_EFFECTIVE | F_EVALUATE_ATTACKS | F_EXPERT_ATTACKS,
@@ -26428,20 +26428,20 @@ const TrainerData sTrainerData[] = {
                 .ability = ABILITY_SNIPER,
                 .setIvs = { 31, 31, 31, 31, 31, 31 },
                 .setEvs = { 0, 0, 0, 0, 0, 0 },
-                .nature = NATURE_IMPISH,
+                .nature = NATURE_ADAMANT,
                 .ballSeal = 0,
             },
             {
                 .ivs = 255,
                 .abilitySlot = TRAINER_POKEMON_ABILITY_1,
-                .level = 23,
+                .level = 21,
                 .species = SPECIES_KOFFING,
                 .item = ITEM_LEFTOVERS,
                 .moves = { MOVE_ASSURANCE, MOVE_SLUDGE_BOMB, MOVE_FLASH, MOVE_WILL_O_WISP },
                 .ability = ABILITY_LEVITATE,
                 .setIvs = { 31, 31, 31, 31, 31, 31 },
                 .setEvs = { 0, 0, 0, 0, 0, 0 },
-                .nature = NATURE_MODEST,
+                .nature = NATURE_SERIOUS,
                 .ballSeal = 0,
             },
             {
@@ -26454,7 +26454,7 @@ const TrainerData sTrainerData[] = {
                 .ability = ABILITY_POISON_TOUCH,
                 .setIvs = { 31, 31, 31, 31, 31, 31 },
                 .setEvs = { 0, 0, 0, 0, 0, 0 },
-                .nature = NATURE_MODEST,
+                .nature = NATURE_ADAMANT,
                 .ballSeal = 0,
             },
             {
@@ -26467,7 +26467,7 @@ const TrainerData sTrainerData[] = {
                 .ability = ABILITY_STRONG_JAW,
                 .setIvs = { 31, 31, 31, 31, 31, 31 },
                 .setEvs = { 0, 0, 0, 0, 0, 0 },
-                .nature = NATURE_IMPISH,
+                .nature = NATURE_JOLLY,
                 .ballSeal = 0,
             },
             {
@@ -26486,14 +26486,14 @@ const TrainerData sTrainerData[] = {
             {
                 .ivs = 255,
                 .abilitySlot = TRAINER_POKEMON_ABILITY_1,
-                .level = 21,
+                .level = 23,
                 .species = SPECIES_SCRAGGY,
                 .item = ITEM_SHELL_BELL,
                 .moves = { MOVE_FEINT_ATTACK, MOVE_LOW_SWEEP, MOVE_THUNDER_PUNCH, MOVE_IRON_HEAD },
                 .ability = ABILITY_MOXIE,
                 .setIvs = { 31, 31, 31, 31, 31, 31 },
                 .setEvs = { 0, 0, 0, 0, 0, 0 },
-                .nature = NATURE_IMPISH,
+                .nature = NATURE_ADAMANT,
                 .ballSeal = 0,
             },
         },
@@ -40825,7 +40825,7 @@ const TrainerData sTrainerData[] = {
             },
         },
     },
-
+    
 };
 
 const u16 sTrainerTextOrder[] = {

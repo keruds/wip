@@ -1369,7 +1369,7 @@ SEQ_SE_GS_GEARSEALGRAB             equ 2375
 SEQ_SE_GS_GEARSEALHAMERU           equ 2376
 SEQ_SE_GS_XBUTTON_SYUKUSHOU        equ 2377
 SEQ_SE_END                         equ 2378
-SEQ_SE_HUGH                        equ 2379
+SEQ_SE_TEST                        equ 2380
 BANK_PV001                          equ   1
 BANK_PV002                          equ   2
 BANK_PV003                          equ   3
@@ -1931,7 +1931,7 @@ BANK_SE_DENDO                       equ 774
 BANK_SE_SEKIBAN                     equ 775
 BANK_SE_PHC                         equ 776
 BANK_SE_EVENT                       equ 777
-BANK_779                            equ 779
+BANK_TEST                           equ 778
 WAVE_ARC_PV001                       equ   1
 WAVE_ARC_PV002                       equ   2
 WAVE_ARC_PV003                       equ   3
@@ -2493,6 +2493,7 @@ WAVE_ARC_SE_DENDO                    equ 774
 WAVE_ARC_SE_SEKIBAN                  equ 775
 WAVE_ARC_SE_PHC                      equ 776
 WAVE_ARC_SE_EVENT                    equ 777
+WAVE_ARC_TEST						 equ 1383
 PLAYER_PV                              equ 0
 PLAYER_FIELD                           equ 1
 PLAYER_ME                              equ 2
